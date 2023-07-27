@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:goagrics/providers/splash_screen_provider.dart';
 import 'package:goagrics/screens/reg_login/login_screen.dart';
+import 'package:goagrics/screens/reg_login/otp_verify_screen.dart';
 import 'package:goagrics/screens/reg_login/registration_screen.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -40,12 +41,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 }
                 else{
                   Timer(const Duration(seconds: 2), () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                    //go to login screen
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegistrationScreen()));
                   });
                 }
               }
               checkLoginReg();
               return Container(
+                color: themeColorWhite,
                 width: getWidth(context),
                 height: getHeight(context),
                 alignment: Alignment.center,
