@@ -4,7 +4,8 @@ import 'package:goagrics/screens/splash_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
 
 void main() async {
-  // await Prefs.createInstance();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Prefs.createInstance();
   runApp(const MyApp());
 }
 
