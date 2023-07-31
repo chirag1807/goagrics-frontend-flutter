@@ -15,27 +15,6 @@ class OtpVerifyScreen extends StatefulWidget {
 class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
   List<String> otpDigits = List.filled(4, '');
   TextEditingController pinController = TextEditingController();
-  void _onNumberPadTap(String number) {
-    setState(() {
-      for (int i = 0; i < otpDigits.length; i++) {
-        if (otpDigits[i].isEmpty) {
-          otpDigits[i] = number;
-          break;
-        }
-      }
-    });
-  }
-
-  void _onBackspaceTap() {
-    setState(() {
-      for (int i = otpDigits.length - 1; i >= 0; i--) {
-        if (otpDigits[i].isNotEmpty) {
-          otpDigits[i] = '';
-          break;
-        }
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
