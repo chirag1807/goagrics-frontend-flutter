@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 else{
                   Timer(const Duration(seconds: 2), () {
                     //go to login screen
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegistrationScreen()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                   });
                 }
               }

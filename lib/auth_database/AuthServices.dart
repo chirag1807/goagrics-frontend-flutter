@@ -18,11 +18,12 @@ class AuthServices {
               e.toString(),
             ),
           ));
-          verifyId = "error " + e.toString();
+          verifyId = "error $e";
         },
         codeSent: ((verificationId, token) {
-          print("Id here: " + token.toString());
+          print("Id here: $token");
           verifyId = verificationId;
+          print(verifyId);
         }),
         codeAutoRetrievalTimeout: (e) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

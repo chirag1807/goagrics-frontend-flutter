@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goagrics/auth_database/AuthServices.dart';
 import 'package:goagrics/utils/constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -113,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     backgroundColor: themeColorDark
                   ),
                   onPressed: () {
+                    AuthServices().verifyPhone("+91${_phoneNoController.text}", context);
                     print(_phoneNoController.text);
                   },
                   child: const Text('Get OTP'),

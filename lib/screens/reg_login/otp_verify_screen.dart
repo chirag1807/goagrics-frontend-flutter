@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goagrics/utils/constants.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
-  const OtpVerifyScreen({Key? key}) : super(key: key);
+  final String generatedCode;
+  const OtpVerifyScreen({Key? key, required this.generatedCode})
+      : super(key: key);
 
   @override
   State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
@@ -46,7 +49,10 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             children: [
               const Text(
                 'Verify Phone',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: themeColorDark),
+                style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: themeColorDark),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 30),
@@ -94,7 +100,8 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                           onPressed: () => _onNumberPadTap('${index + 1}'),
                           child: Text(
                             '${index + 1}',
-                            style: const TextStyle(fontSize: 20, color: themeColorLight),
+                            style: const TextStyle(
+                                fontSize: 20, color: themeColorLight),
                           ),
                         ),
                       );
@@ -105,13 +112,17 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                         onPressed: () => _onNumberPadTap('0'),
                         child: const Text(
                           '0',
-                          style: TextStyle(fontSize: 20, color: themeColorLight),
+                          style:
+                              TextStyle(fontSize: 20, color: themeColorLight),
                         ),
                       ),
                     ),
                     Center(
                       child: IconButton(
-                        icon: const Icon(Icons.backspace, color: themeColorLight,),
+                        icon: const Icon(
+                          Icons.backspace,
+                          color: themeColorLight,
+                        ),
                         onPressed: _onBackspaceTap,
                       ),
                     ),
@@ -120,14 +131,26 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: themeColorDark
-                ),
+                style:
+                    ElevatedButton.styleFrom(backgroundColor: themeColorDark),
                 onPressed: () {
-                  if(otpDigits.join().length == 4) {
-                    print(otpDigits.join());
-                  }
-                  else{
+                  if (otpDigits.join().length == 4) {
+                    try {
+                      final credential = PhoneAuthProvider.credential(
+                        verificationId: widget.generatedCode,
+                        smsCode: otpDigits.join(),
+                      );
+                      FirebaseAuth.instance.signInWithCredential(credential);
+                      print("Successs");
+                    } catch (e) {
+                      print("Failed!!" + e.toString());
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                          e.toString(),
+                        ),
+                      ));
+                    }
+                  } else {
                     //show snack bar
                   }
                 },
