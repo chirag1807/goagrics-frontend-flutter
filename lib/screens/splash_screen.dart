@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:goagrics/helper/weather.dart';
+import 'package:goagrics/models/weather_model.dart';
 import 'package:goagrics/providers/splash_screen_provider.dart';
 import 'package:goagrics/screens/reg_login/login_screen.dart';
 import 'package:goagrics/screens/reg_login/otp_verify_screen.dart';
@@ -27,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Consumer<SplashScreenProvider>(
             builder: (context, provider, _){
               void checkLoginReg() async {
-                int a = await provider.checkLoginAndReg();
+                int? a = await provider.checkLoginAndReg();
                 if(a == 1){
                   Timer(const Duration(seconds: 2), () {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegistrationScreen()));
@@ -45,6 +47,13 @@ class _SplashScreenState extends State<SplashScreen> {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                   });
                 }
+
+                // WeatherModel? weather = await provider.checkLoginAndReg();
+                // if(weather != null){
+                //   Timer(const Duration(seconds: 3), () {
+                //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WeatherScreen(weatherModel: weather)));
+                //   });
+                // }
               }
               checkLoginReg();
               return Container(

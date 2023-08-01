@@ -7,11 +7,11 @@ const themeColorBlack = Color(0xff000000);
 const themeColorSnackBarRed = Color(0xffff0000);
 const themeColorSnackBarGreen = Color(0xff00d759);
 
-double getWidth(BuildContext context){
+double getWidth(BuildContext context) {
   return MediaQuery.of(context).size.width;
 }
 
-double getHeight(BuildContext context){
+double getHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
