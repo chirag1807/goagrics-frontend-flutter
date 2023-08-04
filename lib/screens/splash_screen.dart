@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:goagrics/helper/weather.dart';
+import 'package:goagrics/utils/weather.dart';
 import 'package:goagrics/models/weather_model.dart';
 import 'package:goagrics/providers/splash_screen_provider.dart';
 import 'package:goagrics/screens/reg_login/login_screen.dart';

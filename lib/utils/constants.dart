@@ -20,6 +20,8 @@ const ACCESS_TOKEN = "accessToken";
 // ignore: constant_identifier_names
 const REFRESH_TOKEN = "refreshToken";
 // ignore: constant_identifier_names
+const ID = "id";
+// ignore: constant_identifier_names
 const IS_LOGGED_IN = "isLoggedIn";
 // ignore: constant_identifier_names
 const IS_REGISTERED = "isRegistered";

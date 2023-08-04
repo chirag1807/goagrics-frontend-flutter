@@ -40,7 +40,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode myFocusNode = new FocusNode();
+    FocusNode myFocusNode = FocusNode();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -96,7 +96,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                                         Icons.camera_alt),
                                                     title: const Text('Camera'),
                                                     onTap: () {
-                                                      // _getImageFromCamera();
+                                                      _getImageFromCamera();
                                                       Navigator.pop(context);
                                                     },
                                                   ),
@@ -191,7 +191,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                 'Submit',
                                 style: GoogleFonts.prompt(
                                   fontSize: 16.0,
-                                  color: Colors.white,
+                                  color: themeColorWhite,
                                 ),
                               ),
                             ),
