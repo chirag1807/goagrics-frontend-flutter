@@ -13,6 +13,11 @@ class Api {
           await http.get(Uri.parse('https://go-agrics.vercel.app/api/farmers'));
       if (res.statusCode == 200) {
         var responseData = jsonDecode(res.body);
+        var rest = responseData["data"] as List;
+        allFarmers = rest
+            .map<GetAllFarmers>((json) => GetAllFarmers.fromJson(json))
+            .toList();
+        print(allFarmers[0]);
       } else
         print("Failed");
     } on Exception catch (_, e) {
