@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:goagrics/utils/ListView.dart';
 import 'package:goagrics/utils/horizontal_farmer.dart';
 import 'package:goagrics/utils/constants.dart';
-import 'package:goagrics/utils/weather.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
@@ -104,7 +102,7 @@ class _HomeState extends State<Home> {
                   // ),
                   Container(
                     width: double.infinity,
-                    height: getHeight(context) * 0.22,
+                    height: getHeight(context) * 0.24,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,

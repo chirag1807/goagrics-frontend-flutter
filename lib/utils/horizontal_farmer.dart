@@ -49,7 +49,7 @@ Widget showCard(BuildContext context) {
                     ElevatedButton.styleFrom(backgroundColor: themeColorDark),
                 child: Text(
                   'Skills',
-                  style: GoogleFonts.acme(color: themeColorWhite),
+                  style: GoogleFonts.prompt(color: themeColorWhite),
                 ),
                 onPressed: () {},
               ),

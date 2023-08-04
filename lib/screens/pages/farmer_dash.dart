@@ -5,6 +5,7 @@ import 'package:goagrics/screens/pages/profile_user.dart';
 import 'package:goagrics/utils/constants.dart';
 
 import 'Farmer/home_screen.dart';
+import 'Farmer/labor_screen.dart';
 
 class FarmerDash extends StatefulWidget {
   const FarmerDash({super.key});
@@ -48,7 +49,12 @@ class _FarmerDashState extends State<FarmerDash> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         physics: const NeverScrollableScrollPhysics(),
-        children: [Home(), RegisterLand(), ProfileScreen()],
+        children: [
+          Home(),
+          LaborList(),
+          RegisterLand(),
+          ProfileScreen(),
+        ],
       ),
       bottomNavigationBar: CupertinoTabBar(
         items: [
@@ -62,7 +68,7 @@ class _FarmerDashState extends State<FarmerDash> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.add_circle_outlined,
+              Icons.work,
               color: page == 1 ? themeColorDark : themeColorLight,
             ),
             label: '',
@@ -70,8 +76,17 @@ class _FarmerDashState extends State<FarmerDash> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.person,
+              Icons.add_circle_outlined,
+              textDirection: TextDirection.rtl,
               color: page == 2 ? themeColorDark : themeColorLight,
+            ),
+            label: '',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: page == 3 ? themeColorDark : themeColorLight,
             ),
             label: '',
             backgroundColor: Colors.black,

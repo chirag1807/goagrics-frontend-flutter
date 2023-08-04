@@ -19,6 +19,7 @@ dependencies:
   pinput: ^2.3.0
   google_fonts: ^4.0.4
   firebase_auth: ^4.7.2
+  line_awesome_flutter: ^2.0.0
 
 dev_dependencies:
   flutter_test:

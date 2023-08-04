@@ -24,3 +24,5 @@ const IS_LOGGED_IN = "isLoggedIn";
 // ignore: constant_identifier_names
 const IS_REGISTERED = "isRegistered";
 // ignore: constant_identifier_names
+
+const BASE_URI = "https://go-agrics.vercel.app/api/";
