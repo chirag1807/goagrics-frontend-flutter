@@ -1,30 +1,4 @@
 class GetAllFarmers {
-  bool? success;
-  List<Data>? data;
-
-  GetAllFarmers({this.success, this.data});
-
-  GetAllFarmers.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Data {
   Avatar? avatar;
   String? sId;
   String? fname;
@@ -36,7 +10,7 @@ class Data {
   List<ToolDetails>? toolDetails;
   int? iV;
 
-  Data(
+  GetAllFarmers(
       {this.avatar,
         this.sId,
         this.fname,
@@ -48,7 +22,7 @@ class Data {
         this.toolDetails,
         this.iV});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  GetAllFarmers.fromJson(Map<String, dynamic> json) {
     avatar =
     json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
     sId = json['_id'];

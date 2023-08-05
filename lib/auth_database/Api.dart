@@ -1,41 +1,54 @@
 import 'dart:convert';
 
 import 'package:goagrics/models/get_all_farmers.dart';
+import 'package:goagrics/models/get_all_labors.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static Future<void> getFarmers() async {
+  //GetFarmers from Database
+  static Future<List<GetAllFarmers>> getFarmers() async {
+    List<GetAllFarmers> allFarmers = [];
+
     try {
-      print("Hello2");
-      List<GetAllFarmers> allFarmers = [];
-      var res =
-          await http.get(Uri.parse('https://go-agrics.vercel.app/api/farmers'));
-      if (res.statusCode == 200) {
-        var responseData = jsonDecode(res.body);
-        var rest = responseData["data"] as List;
-        allFarmers = rest
+      var respString = await http.get(Uri.parse(BASE_URI + "/farmers"));
+      if (respString.statusCode == 200) {
+        var respJson = jsonDecode(respString.body);
+        var data = respJson["data"] as List;
+
+        allFarmers = data
             .map<GetAllFarmers>((json) => GetAllFarmers.fromJson(json))
             .toList();
-        print(allFarmers[0]);
-      } else
-        print("Failed");
-    } on Exception catch (_, e) {
-      print("Erro => ${e.toString()}");
+        // print(allFarmers.length);
+        // print("Here is ${allFarmers.runtimeType}");
+      }
+    } on Exception catch (_) {
+      allFarmers = [];
     }
+
+    return allFarmers;
   }
 
-  static Future<void> getLabors() async {
+  //Get Labors from Database
+  static Future<List<GetAllLabors>> getLabors() async {
+    List<GetAllLabors> allLabors = [];
+
     try {
-      print("Hello2");
-      var res =
-          await http.get(Uri.parse('https://go-agrics.vercel.app/api/labors'));
-      if (res.statusCode == 200) {
-        print("Success");
-      } else
-        print("Failed");
-    } on Exception catch (_, e) {
-      print("Erro => ${e.toString()}");
+      var respString = await http.get(Uri.parse(BASE_URI + "/labor"));
+      if (respString.statusCode == 200) {
+        var respJson = jsonDecode(respString.body);
+        var data = respJson["data"] as List;
+
+        allLabors = data
+            .map<GetAllLabors>((json) => GetAllLabors.fromJson(json))
+            .toList();
+        // print(allFarmers.length);
+        // print("Here is ${allFarmers.runtimeType}");
+      }
+    } on Exception catch (_) {
+      allLabors = [];
     }
+
+    return allLabors;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 const themeColorDark = Color(0xff005400);
 const themeColorLight = Color(0xff009300);
@@ -13,6 +14,16 @@ double getWidth(BuildContext context) {
 
 double getHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
+}
+
+showSnackBar(String content, BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    content: Text(
+      content,
+      style: GoogleFonts.prompt(color: themeColorWhite, fontSize: 14),
+    ),
+    backgroundColor: themeColorDark,
+  ));
 }
 
 // ignore: constant_identifier_names

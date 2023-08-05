@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget showCard(BuildContext context) {
+import '../models/get_all_labors.dart';
+
+Widget showCard(BuildContext context, GetAllLabors labor) {
   return InkWell(
     onTap: () {},
     child: Padding(
@@ -23,7 +25,7 @@ Widget showCard(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Name of Farmer',
+                labor.lname!,
                 style: GoogleFonts.urbanist(fontWeight: FontWeight.bold),
               ),
               const SizedBox(
@@ -38,7 +40,7 @@ Widget showCard(BuildContext context) {
                 height: 10,
               ),
               Text(
-                'Rs. XXX/Day',
+                'Rs. ${labor.wage.toString()}',
                 style: GoogleFonts.urbanist(fontWeight: FontWeight.w500),
               ),
               const SizedBox(
