@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/utils/horizontal_labor.dart';
 import 'package:goagrics/utils/constants.dart';
+import 'package:goagrics/utils/weather.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../auth_database/Api.dart';
 import '../../../models/get_all_labors.dart';
+import '../../../models/weather_model.dart';
+import '../weather_repo.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -17,6 +20,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<GetAllLabors> labors = [];
   var isLoading = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -24,7 +28,16 @@ class _HomeState extends State<Home> {
     setState(() {
       isLoading = true;
     });
+    fetchWeather();
     fetchLabors();
+  }
+
+  WeatherModel? weatherData;
+
+  void fetchWeather() async {
+    // weatherData = await WeatherRepo().getWeather("Ahmedabad");
+    // print(weatherData!.weather![0].icon);
+    setState(() {});
   }
 
   void fetchLabors() async {
@@ -58,76 +71,14 @@ class _HomeState extends State<Home> {
                     thickness: 1.5,
                     color: themeColorDark,
                   ),
-                  // const SizedBox(
-                  //   height: 50,
-                  // ),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Text(
-                        //   'Labors Near You',
-                        //   style: GoogleFonts.notoSansJavanese(
-                        //       color: themeColorDark, fontSize: 18),
-                        // ),
-                        // SizedBox(
-                        //   height: 5.0,
-                        // ),
-                        // Container(
-                        //   width: getWidth(context) * 0.42,
-                        //   decoration: BoxDecoration(
-                        //     color: Colors.white,
-                        //     border: Border.all(
-                        //       color: themeColorLight,
-                        //       width: 1,
-                        //     ),
-                        //     borderRadius: BorderRadius.circular(8.0),
-                        //   ),
-                        //   child: Padding(
-                        //     padding: const EdgeInsets.symmetric(
-                        //         horizontal: 20.0, vertical: 20.0),
-                        //     child: Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.center,
-                        //       children: [
-                        //         Text(
-                        //           'Name of Farmer',
-                        //           style: GoogleFonts.urbanist(
-                        //               fontWeight: FontWeight.bold),
-                        //         ),
-                        //         const SizedBox(
-                        //           height: 10,
-                        //         ),
-                        //         Text(
-                        //           'City Name | State',
-                        //           style: GoogleFonts.urbanist(),
-                        //           overflow: TextOverflow.ellipsis,
-                        //         ),
-                        //         const SizedBox(
-                        //           height: 10,
-                        //         ),
-                        //         Text(
-                        //           'Rs. XXX/Day',
-                        //           style: GoogleFonts.urbanist(
-                        //               fontWeight: FontWeight.w500),
-                        //         ),
-                        //         const SizedBox(
-                        //           height: 10,
-                        //         ),
-                        //         ElevatedButton(
-                        //           style: ElevatedButton.styleFrom(
-                        //               backgroundColor: themeColorDark),
-                        //           child: Text(
-                        //             'Skills',
-                        //             style: GoogleFonts.acme(color: themeColorWhite),
-                        //           ),
-                        //           onPressed: () {},
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
+                        WeatherScreen(context),
+                        SizedBox(height: 20),
                         Container(
                           width: double.infinity,
                           height: getHeight(context) * 0.24,

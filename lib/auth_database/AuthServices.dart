@@ -1,42 +1,45 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goagrics/utils/constants.dart';
+import 'package:http/http.dart' as http;
 
 class AuthServices {
-  FirebaseAuth auth = FirebaseAuth.instance;
-
-  Future<String> verifyPhone(String number, BuildContext context) async {
-    String verifyId = "";
-
+  Future<int> generateOTP(String phone, BuildContext context) async {
+    int otp = 0;
+    String url = "generate";
     try {
-      auth.verifyPhoneNumber(
-        phoneNumber: number,
-        verificationCompleted: (_) {},
-        verificationFailed: (e) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-              e.toString(),
-            ),
-          ));
-          verifyId = "error " + e.toString();
+      var response = await http.post(
+        Uri.parse(BASE_URI + url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Connection': 'keep-alive',
+          'Accept': 'application/json',
         },
-        codeSent: ((verificationId, token) {
-          print("Id here: " + token.toString());
-          verifyId = verificationId;
-        }),
-        codeAutoRetrievalTimeout: (e) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-              e.toString(),
-            ),
-          ));
-
-          verifyId = "error " + e.toString();
-        },
+        body: jsonEncode(<String, String>{'mobno': phone}),
       );
-    } catch (e) {
-      verifyId = "error " + e.toString();
+      otp = response.statusCode;
+    } catch (error) {
+      showSnackBar(error.toString(), context);
     }
+    return otp;
+  }
 
-    return verifyId;
+  Future<bool> verifyOTP(String phone, String otp) async {
+    bool status = false;
+    String url = "verify";
+    var response = await http.post(
+      Uri.parse(BASE_URI + url),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Connection': 'keep-alive',
+        'Accept': 'application/json',
+      },
+      body: jsonEncode(<String, String>{'phone': phone, 'otp': otp}),
+    );
+
+    return status;
   }
 }

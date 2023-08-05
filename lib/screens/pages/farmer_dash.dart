@@ -18,16 +18,15 @@ class _FarmerDashState extends State<FarmerDash> {
   late PageController _pageController;
 
   int page = 0;
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _pageController = PageController();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     _pageController.dispose();
   }

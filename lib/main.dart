@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/screens/pages/farmer_dash.dart';
+import 'package:goagrics/screens/reg_login/login_screen.dart';
 
 import 'package:goagrics/utils/prefs.dart';
 
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Hello");
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',

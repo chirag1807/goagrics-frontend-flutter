@@ -37,3 +37,4 @@ const IS_REGISTERED = "isRegistered";
 // ignore: constant_identifier_names
 
 const BASE_URI = "https://go-agrics.vercel.app/api/";
+const apikey = "4cc41342b133bba8a995e077ca6769a0";
