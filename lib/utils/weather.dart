@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/models/weather_model.dart';
 import 'package:goagrics/utils/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Widget WeatherScreen(BuildContext context) {
   return Container(
@@ -15,24 +16,27 @@ Widget WeatherScreen(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               // 'High: ${weatherModel.main?.tempMax}°C, Low: ${weatherModel.main?.tempMin}°C',
               'High: 29.2 °C, Low: 29.02 °C',
-              style: const TextStyle(fontSize: 16),
+              style: GoogleFonts.urbanist(fontSize: 16),
             ),
             Text(
               // '${weatherModel.main?.temp}°C',
               '32°C',
-              style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w600),
+              style: GoogleFonts.urbanist(
+                fontSize: 36,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             Text(
               // 'Feels Like: ${weatherModel.main?.feelsLike}°C',
               'Feels Like: 37.02 °C',
-              style: const TextStyle(fontSize: 14),
+              style: GoogleFonts.urbanist(fontSize: 14),
             ),
           ],
         ),
@@ -50,7 +54,7 @@ Widget WeatherScreen(BuildContext context) {
             Text(
               // 'Humidity: ${weatherModel.main?.humidity}%',
               'Humidity: 80%',
-              style: const TextStyle(fontSize: 16),
+              style: GoogleFonts.urbanist(fontSize: 16),
             ),
           ],
         )

@@ -17,15 +17,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-              leading:
-                  const Image(image: AssetImage('assets/images/goagrics.png')),
-              backgroundColor: themeColorWhite,
-              elevation: 0.0,
-              title: Text(
-                'GoAgrics',
-                style: GoogleFonts.urbanist(
-                    fontSize: 18.0, color: themeColorLight),
-              )),
+            leading:
+                const Image(image: AssetImage('assets/images/goagrics.png')),
+            backgroundColor: themeColorWhite,
+            elevation: 0.0,
+            title: Text(
+              'GoAgrics',
+              style:
+                  GoogleFonts.urbanist(fontSize: 18.0, color: themeColorLight),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    print("Sign Out");
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Expanded(
+                          child: AlertDialog(
+                            backgroundColor: themeColorWhite,
+                            title: Text(
+                              'Log Out',
+                              style: GoogleFonts.prompt(
+                                  fontSize: 16.0, color: themeColorLight),
+                            ),
+                            content: Text(
+                              'Are you sure, you want to log out?',
+                              style: GoogleFonts.prompt(
+                                  fontSize: 15.0, color: themeColorLight),
+                            ),
+                            actions: [
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'CANCEL',
+                                  style: GoogleFonts.prompt(
+                                      color: themeColorLight),
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'YES',
+                                  style: GoogleFonts.prompt(
+                                      color: themeColorLight),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.logout,
+                    color: themeColorLight,
+                  ))
+            ],
+          ),
           backgroundColor: themeColorWhite,
           body: SingleChildScrollView(
               child: Column(
@@ -46,7 +95,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-
                   Form(
                     child: Column(
                       children: [
@@ -79,7 +127,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                         ),
                         const SizedBox(height: 30),
-
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -93,7 +140,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     GoogleFonts.prompt(color: themeColorWhite)),
                           ),
                         ),
-
                         const SizedBox(height: 30),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,

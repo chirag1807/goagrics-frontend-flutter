@@ -55,15 +55,23 @@ class _HomeState extends State<Home> {
         : SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                  leading: const Image(
-                      image: AssetImage('assets/images/goagrics.png')),
-                  backgroundColor: themeColorWhite,
-                  elevation: 0.0,
-                  title: Text(
-                    'GoAgrics',
-                    style: GoogleFonts.urbanist(
-                        fontSize: 18.0, color: themeColorLight),
-                  )),
+                leading: const Image(
+                    image: AssetImage('assets/images/goagrics.png')),
+                backgroundColor: themeColorWhite,
+                elevation: 0.0,
+                title: Text(
+                  'GoAgrics',
+                  style: GoogleFonts.urbanist(
+                      fontSize: 18.0, color: themeColorLight),
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.smart_toy),
+                    color: themeColorLight,
+                  ),
+                ],
+              ),
               backgroundColor: themeColorWhite,
               body: Column(
                 children: [
@@ -73,15 +81,48 @@ class _HomeState extends State<Home> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                        EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 6.0),
+                          child: Text(
+                            'Weather Analysis',
+                            style: GoogleFonts.urbanist(
+                                color: themeColorLight, fontSize: 16.0),
+                          ),
+                        ),
+                        SizedBox(height: 8),
                         WeatherScreen(context),
                         SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 6.0),
+                              child: Text(
+                                'Labors Near you',
+                                style: GoogleFonts.urbanist(
+                                    color: themeColorLight, fontSize: 16.0),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                'View All',
+                                style: GoogleFonts.urbanist(
+                                  color: themeColorLight,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 8),
                         Container(
                           width: double.infinity,
-                          height: getHeight(context) * 0.24,
+                          height: getHeight(context) * 0.22,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
