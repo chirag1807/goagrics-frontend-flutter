@@ -34,21 +34,23 @@ class GetAllLabors {
   int? phoneNo;
   List<String>? skills;
   int? iV;
+  int? wage;
 
   GetAllLabors(
       {this.avatar,
-        this.sId,
-        this.lname,
-        this.category,
-        this.address,
-        this.pincode,
-        this.phoneNo,
-        this.skills,
-        this.iV});
+      this.sId,
+      this.lname,
+      this.category,
+      this.address,
+      this.pincode,
+      this.phoneNo,
+      this.skills,
+      this.iV,
+      this.wage});
 
   GetAllLabors.fromJson(Map<String, dynamic> json) {
     avatar =
-    json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
+        json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
     sId = json['_id'];
     lname = json['lname'];
     category = json['category'];
@@ -57,6 +59,7 @@ class GetAllLabors {
     phoneNo = json['phoneNo'];
     skills = json['skills'].cast<String>();
     iV = json['__v'];
+    wage = json['pricePerDay'];
   }
 
   Map<String, dynamic> toJson() {
@@ -72,6 +75,7 @@ class GetAllLabors {
     data['phoneNo'] = this.phoneNo;
     data['skills'] = this.skills;
     data['__v'] = this.iV;
+    data['pricePerDay'] = this.wage;
     return data;
   }
 }

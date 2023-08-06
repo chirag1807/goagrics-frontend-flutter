@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/auth_database/AuthServices.dart';
+import 'package:goagrics/screens/reg_login/otp_verify_screen.dart';
 import 'package:goagrics/utils/constants.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -23,8 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onBackspaceTap() {
     if (_phoneNoController.text.isNotEmpty) {
       setState(() {
-        _phoneNoController.text =
-            _phoneNoController.text.substring(0, _phoneNoController.text.length - 1);
+        _phoneNoController.text = _phoneNoController.text
+            .substring(0, _phoneNoController.text.length - 1);
       });
     }
   }
@@ -34,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: InkWell(
-          onTap: (){
+          onTap: () {
             FocusScope.of(context).unfocus();
           },
           child: Container(
@@ -46,7 +47,10 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const Text(
                   'Login',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: themeColorDark),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: themeColorDark),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 20),
@@ -68,7 +72,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       controller: _phoneNoController,
                       cursorColor: themeColorDark,
                       keyboardType: TextInputType.phone,
-                      decoration: const InputDecoration.collapsed(hintText: 'Mobile Number'),
+                      decoration: const InputDecoration.collapsed(
+                          hintText: 'Mobile Number'),
                     ),
                   ),
                 ),
@@ -84,7 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
                             onPressed: () => _onNumberPadTap('${index + 1}'),
                             child: Text(
                               '${index + 1}',
-                              style: const TextStyle(fontSize: 20, color: themeColorLight),
+                              style: const TextStyle(
+                                  fontSize: 20, color: themeColorLight),
                             ),
                           ),
                         );
@@ -95,13 +101,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () => _onNumberPadTap('0'),
                           child: const Text(
                             '0',
-                            style: TextStyle(fontSize: 20, color: themeColorLight),
+                            style:
+                            TextStyle(fontSize: 20, color: themeColorLight),
                           ),
                         ),
                       ),
                       Center(
                         child: IconButton(
-                          icon: const Icon(Icons.backspace, color: themeColorDark,),
+                          icon: const Icon(
+                            Icons.backspace,
+                            color: themeColorDark,
+                          ),
                           onPressed: _onBackspaceTap,
                         ),
                       ),
@@ -110,12 +120,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: themeColorDark
-                  ),
-                  onPressed: () {
-                    AuthServices().verifyPhone("+91${_phoneNoController.text}", context);
-                    print(_phoneNoController.text);
+                  style:
+                  ElevatedButton.styleFrom(backgroundColor: themeColorDark),
+                  onPressed: () async {
+                    int code = await AuthServices()
+                        .generateOTP(_phoneNoController.text, context);
+                    String message = "";
+                    print(code);
+                    if (code == 200) {
+                      message = "OTP Sent Successfully";
+                      showSnackBar(message, context);
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => OtpVerifyScreen(
+                          phone: _phoneNoController.text,
+                        ),
+                      ));
+                    } else if (code == 400) {
+                      showSnackBar(message, context);
+                      message = "Please Try Again with Correct Phone Number";
+                    } else if (code == 500) {
+                      showSnackBar(message, context);
+                      message = "Internal Server Error, try again later";
+                    }
                   },
                   child: const Text('Get OTP'),
                 ),

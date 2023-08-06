@@ -6,8 +6,8 @@ import 'package:pinput/pinput.dart';
 
 // ignore: must_be_immutable
 class OtpVerifyScreen extends StatefulWidget {
-  final String generatedCode;
-  const OtpVerifyScreen({super.key, required this.generatedCode});
+  String phone;
+  OtpVerifyScreen({super.key, required this.phone});
 
   @override
   State<OtpVerifyScreen> createState() => _OtpVerifyScreenState();
@@ -81,24 +81,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                 const SizedBox(height: 20),
                 const Expanded(child: SizedBox()),
                 InkWell(
-                  onTap: () {
-                    try {
-                      final credential = PhoneAuthProvider.credential(
-                        verificationId: widget.generatedCode,
-                        smsCode: pinController.text,
-                      );
-                      FirebaseAuth.instance.signInWithCredential(credential);
-                      print("Successs");
-                    } catch (e) {
-                      print("Failed!!" + e.toString());
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                          e.toString(),
-                        ),
-                      ));
-                    }
-                    print(pinController.text);
-                  },
+                  onTap: () {},
                   borderRadius: BorderRadius.circular(30.0),
                   child: Ink(
                     height: 55.0,

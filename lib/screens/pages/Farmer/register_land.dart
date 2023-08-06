@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:goagrics/utils/TextField.dart';
@@ -6,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../utils/constants.dart';
+import '../../../repositories/register_land.dart';
 
 class RegisterLand extends StatefulWidget {
   const RegisterLand({super.key});
@@ -15,23 +17,23 @@ class RegisterLand extends StatefulWidget {
 }
 
 class _RegisterLandState extends State<RegisterLand> {
-  late double _area;
-  late String _type;
-  late double _pricePerDay;
 
   final TextEditingController _areaController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _toolPriceController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  XFile? _pickedImage;
+  File? _pickedImage;
 
   void _getImageFromGallery() async {
     final pickedImage =
     await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
-      _pickedImage = pickedImage;
+      if(pickedImage != null) {
+        _pickedImage = File(pickedImage.path);
+      }
     });
   }
 
@@ -39,26 +41,54 @@ class _RegisterLandState extends State<RegisterLand> {
     final pickedImage =
     await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
-      _pickedImage = pickedImage;
+      if(pickedImage != null){
+        _pickedImage = File(pickedImage.path);
+      }
     });
   }
+
+  String _selectedCategory = 'Land';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: GestureDetector(
-          onTap: (){
-            FocusScope.of(context).unfocus();
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Form(
-              key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: GestureDetector(
+              onTap: (){
+                FocusScope.of(context).unfocus();
+              },
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Radio<String>(
+                            value: 'Land',
+                            groupValue: _selectedCategory,
+                            onChanged: (value){
+                              setState(() {
+                                _selectedCategory = value!;
+                              });
+                            }),
+                        const Text("Land"),
+                        Radio<String>(
+                            value: 'Tool',
+                            groupValue: _selectedCategory,
+                            onChanged: (value){
+                              setState(() {
+                                _selectedCategory = value!;
+                              });
+                            }),
+                        const Text("Tool"),
+                      ],
+                    ),
+                    const SizedBox(height: 20,),
                     _pickedImage == null
                         ? Container(
                       height: 200,
@@ -112,12 +142,19 @@ class _RegisterLandState extends State<RegisterLand> {
                               fit: BoxFit.fitHeight)),
                     ),
                     const SizedBox(height: 20,),
-                    GoTextField(label: 'Land Area', controller: _areaController),
-                    const SizedBox(height: 20,),
-                    GoTextField(label: 'Land Type', controller: _typeController),
-                    const SizedBox(height: 20,),
-                    GoTextField(label: 'Land Price', controller: _priceController),
-                    const SizedBox(height: 20,),
+                    _selectedCategory == 'Land' ?
+                        Column(
+                          children: [
+                            GoTextField(label: 'Land Area', controller: _areaController),
+                            const SizedBox(height: 20,),
+                            GoTextField(label: 'Land Type', controller: _typeController),
+                            const SizedBox(height: 20,),
+                            GoTextField(label: 'Land Price', controller: _priceController),
+                            const SizedBox(height: 20,),
+                          ],
+                        ) :
+                        GoTextField(label: 'Tool Price', controller: _toolPriceController),
+                        const SizedBox(height: 20,),
                     SizedBox(
                       width: getWidth(context),
                       child: ElevatedButton(
@@ -126,7 +163,7 @@ class _RegisterLandState extends State<RegisterLand> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             backgroundColor: themeColorDark),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             if(_pickedImage == null){
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Provide Image of Land...",
@@ -135,6 +172,25 @@ class _RegisterLandState extends State<RegisterLand> {
                                   color: themeColorWhite,
                               ),),
                                 backgroundColor: themeColorSnackBarRed, ));
+                            }
+                            else{
+                              int? a;
+                              if(_selectedCategory == 'Land'){
+                                a = await RegisterLandRepo().registerFarmersLand(_pickedImage, _typeController.text,
+                                    _areaController.text, _priceController.text);
+                              }
+                              else{
+                                // a = call registerTool Api.
+                              }
+                              if(a == 1){
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text("Land Registration done Successfully...")));
+                                //success
+                              }
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text("Something went Wrong Successfully...")));
+                              }
                             }
                           }
                         },

@@ -17,7 +17,7 @@ class FarmerDash extends StatefulWidget {
 class _FarmerDashState extends State<FarmerDash> {
   late PageController _pageController;
 
-  int page = 0;
+  int page = 2;
 
   @override
   void initState() {

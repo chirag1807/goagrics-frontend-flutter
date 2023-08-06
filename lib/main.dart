@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:goagrics/screens/pages/Farmer/register_land.dart';
 import 'package:goagrics/screens/pages/farmer_dash.dart';
 import 'package:goagrics/utils/prefs.dart';
 import 'firebase_options.dart';
@@ -19,13 +20,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Hello");
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
-        home: const FarmerDash());
+        home: const RegisterLand());
 
   }
 }

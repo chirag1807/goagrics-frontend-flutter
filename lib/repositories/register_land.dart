@@ -1,22 +1,20 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:goagrics/utils/constants.dart';
 import 'package:goagrics/utils/prefs.dart';
 import 'package:http/http.dart' as http;
 
-class RegisterLand{
-  Future<int?> registerFarmersLand(File? landImg, String type, String area, double price) async {
-    String? id = Prefs.getInstance().getString(ID);
+class RegisterLandRepo{
+  Future<int?> registerFarmersLand(File? landImg, String type, String area, String price) async {
+    // String? id = Prefs.getInstance().getString(ID);
 
     try{
-      var request = http.MultipartRequest('POST', Uri.parse("uri"));
-      request.files.add(await http.MultipartFile.fromPath('image', landImg!.path));
+      var request = http.MultipartRequest('POST', Uri.parse("${BASE_URI}farmer/register/64ce072a0eb74333d629fb4a"));
+      request.files.add(await http.MultipartFile.fromPath('landPhoto', landImg!.path));
 
       request.fields['type'] = type;
       request.fields['area'] = area;
-      request.fields['price'] = price.toString();
+      request.fields['l_price'] = price;
 
       var response = await request.send();
 
