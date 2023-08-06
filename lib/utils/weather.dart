@@ -3,7 +3,7 @@ import 'package:goagrics/models/weather_model.dart';
 import 'package:goagrics/utils/constants.dart';
 
 class WeatherScreen extends StatefulWidget {
-  final WeatherModel weatherModel;
+  final WeatherModel? weatherModel;
   const WeatherScreen({Key? key, required this.weatherModel}) : super(key: key);
 
   @override
@@ -33,28 +33,38 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'High: ${widget.weatherModel.main?.tempMax}°C, Low: ${widget.weatherModel.main?.tempMin}°C',
+                    widget.weatherModel != null && widget.weatherModel?.main != null ?
+                    'High: ${widget.weatherModel?.main?.tempMax}°C, Low: ${widget.weatherModel?.main?.tempMin}°C'
+                    : "High: __°C, Low: __°C",
                     style: const TextStyle(fontSize: 16),
                   ),
                   Text(
-                    '${widget.weatherModel.main?.temp}°C',
+                    widget.weatherModel != null && widget.weatherModel?.main != null ?
+                    '${widget.weatherModel?.main?.temp}°C'
+                    : "__°C",
                     style: const TextStyle(fontSize: 36, fontWeight: FontWeight.w600),
+
                   ),
                   Text(
-                    'Feels Like: ${widget.weatherModel.main?.feelsLike}°C',
+                    widget.weatherModel != null && widget.weatherModel?.main != null ?
+                    'Feels Like: ${widget.weatherModel?.main?.feelsLike}°C'
+                    : "Feels Like: __°C",
                     style: const TextStyle(fontSize: 14),
                   ),
                 ],
               ),
-
               const SizedBox(width: 25,),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network("https://openweathermap.org/img/wn/${widget.weatherModel.weather![0].icon}@2x.png", height: 100,),
+                  widget.weatherModel != null && widget.weatherModel?.weather != null ?
+                  Image.network("https://openweathermap.org/img/wn/${widget.weatherModel?.weather![0].icon}@2x.png", height: 100,)
+                  : Text("data"),
                   Text(
-                    'Humidity: ${widget.weatherModel.main?.humidity}%',
+                    widget.weatherModel != null && widget.weatherModel?.main != null ?
+                    'Humidity: ${widget.weatherModel?.main?.humidity}%'
+                    : "Humidity: __%",
                     style: const TextStyle(fontSize: 16),
                   ),
                 ],
@@ -62,8 +72,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             ],
           ),
         ),
-      ),
+      )
     );
-
   }
 }

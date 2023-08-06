@@ -1,30 +1,30 @@
+// class GetAllLabors {
+//   bool? success;
+//   List<Data>? data;
+//
+//   GetAllLabors({this.success, this.data});
+//
+//   GetAllLabors.fromJson(Map<String, dynamic> json) {
+//     success = json['success'];
+//     if (json['data'] != null) {
+//       data = <Data>[];
+//       json['data'].forEach((v) {
+//         data!.add(new Data.fromJson(v));
+//       });
+//     }
+//   }
+//
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['success'] = this.success;
+//     if (this.data != null) {
+//       data['data'] = this.data!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
+
 class GetAllLabors {
-  bool? success;
-  List<Data>? data;
-
-  GetAllLabors({this.success, this.data});
-
-  GetAllLabors.fromJson(Map<String, dynamic> json) {
-    success = json['success'];
-    if (json['data'] != null) {
-      data = <Data>[];
-      json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
-      });
-    }
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
-    if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
-
-class Data {
   Avatar? avatar;
   String? sId;
   String? lname;
@@ -35,7 +35,7 @@ class Data {
   List<String>? skills;
   int? iV;
 
-  Data(
+  GetAllLabors(
       {this.avatar,
         this.sId,
         this.lname,
@@ -46,7 +46,7 @@ class Data {
         this.skills,
         this.iV});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  GetAllLabors.fromJson(Map<String, dynamic> json) {
     avatar =
     json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
     sId = json['_id'];

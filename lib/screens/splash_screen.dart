@@ -17,7 +17,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -27,24 +26,29 @@ class _SplashScreenState extends State<SplashScreen> {
       child: Scaffold(
         body: SafeArea(
           child: Consumer<SplashScreenProvider>(
-            builder: (context, provider, _){
+            builder: (context, provider, _) {
               void checkLoginReg() async {
                 int? a = await provider.checkLoginAndReg();
-                if(a == 1){
+                if (a == 1) {
                   Timer(const Duration(seconds: 2), () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegistrationScreen()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegistrationScreen()));
                   });
-                }
-                else if(a == 2){
+                } else if (a == 2) {
                   Timer(const Duration(seconds: 2), () {
                     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const RegistrationScreen()));
                     // Change it to appropriate home screen
                   });
-                }
-                else{
+                } else {
                   Timer(const Duration(seconds: 2), () {
                     //go to login screen
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegistrationScreen()));
                   });
                 }
 
@@ -55,6 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 //   });
                 // }
               }
+
               checkLoginReg();
               return Container(
                 color: themeColorWhite,
@@ -68,5 +73,5 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-  }
+}
 }

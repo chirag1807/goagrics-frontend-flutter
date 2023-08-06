@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goagrics/screens/pages/farmer_dash.dart';
-import 'package:goagrics/screens/reg_login/login_screen.dart';
-import 'package:goagrics/screens/splash_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
 import 'firebase_options.dart';
 
@@ -28,5 +26,6 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
         home: const FarmerDash());
+
   }
 }

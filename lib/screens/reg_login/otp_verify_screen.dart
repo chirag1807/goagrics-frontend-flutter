@@ -4,6 +4,7 @@ import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
+// ignore: must_be_immutable
 class OtpVerifyScreen extends StatefulWidget {
   final String generatedCode;
   const OtpVerifyScreen({super.key, required this.generatedCode});
