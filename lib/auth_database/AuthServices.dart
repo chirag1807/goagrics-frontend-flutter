@@ -39,6 +39,8 @@ class AuthServices {
       },
       body: jsonEncode(<String, String>{'phone': phone, 'otp': otp}),
     );
+    // response.
+    if (response.statusCode == 200) status = true;
 
     return status;
   }

@@ -8,7 +8,6 @@ import 'package:lottie/lottie.dart';
 import '../../../auth_database/Api.dart';
 import '../../../models/get_all_labors.dart';
 import '../../../models/weather_model.dart';
-import '../weather_repo.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
