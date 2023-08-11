@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goagrics/models/login.dart';
+import 'package:goagrics/models/registration.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:http/http.dart' as http;
+
+import '../utils/prefs.dart';
 
 class AuthServices {
   Future<int> generateOTP(String phone, BuildContext context) async {
@@ -22,7 +24,7 @@ class AuthServices {
       );
       otp = response.statusCode;
     } catch (error) {
-      showSnackBar(error.toString(), context);
+      showSnackBar(error.toString(), context, themeColorSnackBarRed);
     }
     return otp;
   }
@@ -39,7 +41,50 @@ class AuthServices {
       },
       body: jsonEncode(<String, String>{'phone': phone, 'otp': otp}),
     );
-
+    if(response.statusCode == 200){
+      var body = jsonDecode(response.body);
+      print(body);
+      Login data = Login.fromJson(body);
+      if(data.data != null){
+        await Prefs.getInstance().setString(ID, data.data!.sId!);
+        await Prefs.getInstance().setString(CATEGORY, data.data!.category!);
+      }
+      await Prefs.getInstance().setBool(IS_LOGGED_IN, true);
+      status = true;
+    }
     return status;
+  }
+
+  Future<bool> registration(File? Avatar, String name, String category, String address, String pincode, String mobno, String city) async {
+    try{
+      var request = http.MultipartRequest('POST', Uri.parse("${BASE_URI}register"));
+      request.files.add(await http.MultipartFile.fromPath('Avatar', Avatar!.path));
+
+      request.fields['name'] = name;
+      request.fields['category'] = category;
+      request.fields['address'] = address;
+      request.fields['pincode'] = pincode;
+      request.fields['mobno'] = mobno;
+      request.fields['city'] = city;
+
+      var response = await request.send();
+
+      if(response.statusCode == 200){
+        var responseBody = await response.stream.bytesToString();
+        var body = jsonDecode(responseBody);
+        Registration data = Registration.fromJson(body);
+        await Prefs.getInstance().setString(ID, data.data!.sId!);
+        await Prefs.getInstance().setString(CATEGORY, data.data!.category!);
+        await Prefs.getInstance().setBool(IS_REGISTERED, true);
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    catch(e){
+      print(e);
+      return false;
+    }
   }
 }

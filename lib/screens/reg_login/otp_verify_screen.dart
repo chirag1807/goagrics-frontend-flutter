@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:goagrics/auth_database/AuthServices.dart';
+import 'package:goagrics/screens/reg_login/registration_screen.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../utils/prefs.dart';
 
 // ignore: must_be_immutable
 class OtpVerifyScreen extends StatefulWidget {
@@ -14,7 +18,6 @@ class OtpVerifyScreen extends StatefulWidget {
 }
 
 class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
-  List<String> otpDigits = List.filled(4, '');
   TextEditingController pinController = TextEditingController();
 
   @override
@@ -81,7 +84,22 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                 const SizedBox(height: 20),
                 const Expanded(child: SizedBox()),
                 InkWell(
-                  onTap: () {},
+                  onTap: () async {
+                    bool status = await AuthServices().verifyOTP(widget.phone, pinController.text);
+                    if(status){
+                      showSnackBar("OTP Verification Done Successfully...", context, themeColorSnackBarGreen);
+                      bool? isRegistered = Prefs.getInstance().getBool(IS_REGISTERED);
+                      if(isRegistered == true){
+                        //go to home screen
+                      }
+                      else{
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
+                      }
+                    }
+                    else{
+                      showSnackBar("OTP Verification Failed!", context, themeColorSnackBarGreen);
+                    }
+                  },
                   borderRadius: BorderRadius.circular(30.0),
                   child: Ink(
                     height: 55.0,

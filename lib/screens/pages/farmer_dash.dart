@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goagrics/screens/pages/Farmer/register_land.dart';
+import 'package:goagrics/screens/pages/Farmer/register_land_tool.dart';
 import 'package:goagrics/screens/pages/profile_user.dart';
 import 'package:goagrics/utils/constants.dart';
 
@@ -48,10 +48,10 @@ class _FarmerDashState extends State<FarmerDash> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
+        children: const [
           Home(),
           LaborList(),
-          RegisterLand(),
+          RegisterLandTool(),
           ProfileScreen(),
         ],
       ),

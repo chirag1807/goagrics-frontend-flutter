@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:goagrics/repositories/register_tool.dart';
 import 'package:goagrics/utils/TextField.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,14 +9,14 @@ import 'package:image_picker/image_picker.dart';
 import '../../../utils/constants.dart';
 import '../../../repositories/register_land.dart';
 
-class RegisterLand extends StatefulWidget {
-  const RegisterLand({super.key});
+class RegisterLandTool extends StatefulWidget {
+  const RegisterLandTool({super.key});
 
   @override
-  State<RegisterLand> createState() => _RegisterLandState();
+  State<RegisterLandTool> createState() => _RegisterLandToolState();
 }
 
-class _RegisterLandState extends State<RegisterLand> {
+class _RegisterLandToolState extends State<RegisterLandTool> {
 
   final TextEditingController _areaController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
@@ -68,24 +68,32 @@ class _RegisterLandState extends State<RegisterLand> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Radio<String>(
-                            value: 'Land',
-                            groupValue: _selectedCategory,
-                            onChanged: (value){
-                              setState(() {
-                                _selectedCategory = value!;
-                              });
-                            }),
-                        const Text("Land"),
-                        Radio<String>(
-                            value: 'Tool',
-                            groupValue: _selectedCategory,
-                            onChanged: (value){
-                              setState(() {
-                                _selectedCategory = value!;
-                              });
-                            }),
-                        const Text("Tool"),
+                        Row(
+                          children: [
+                            Radio<String>(
+                                value: 'Land',
+                                groupValue: _selectedCategory,
+                                onChanged: (value){
+                                  setState(() {
+                                    _selectedCategory = value!;
+                                  });
+                                }),
+                            const Text("Land"),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Radio<String>(
+                                value: 'Tool',
+                                groupValue: _selectedCategory,
+                                onChanged: (value){
+                                  setState(() {
+                                    _selectedCategory = value!;
+                                  });
+                                }),
+                            const Text("Tool"),
+                          ],
+                        )
                       ],
                     ),
                     const SizedBox(height: 20,),
@@ -180,16 +188,19 @@ class _RegisterLandState extends State<RegisterLand> {
                                     _areaController.text, _priceController.text);
                               }
                               else{
-                                // a = call registerTool Api.
+                                a = await RegisterToolRepo().registerFarmersTool(_pickedImage, _toolPriceController.text);
                               }
                               if(a == 1){
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Land Registration done Successfully...")));
-                                //success
+                                showSnackBar("Registration done Successfully...", context, themeColorSnackBarGreen);
+                                _typeController.text = "";
+                                _areaController.text = "";
+                                _priceController.text = "";
+                                _toolPriceController.text = "";
+                                _pickedImage = null;
+                                setState(() {});
                               }
                               else{
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text("Something went Wrong Successfully...")));
+                                showSnackBar("Something went Wrong...", context, themeColorSnackBarRed);
                               }
                             }
                           }

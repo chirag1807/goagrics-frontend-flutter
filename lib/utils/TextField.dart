@@ -10,15 +10,15 @@ class GoTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode myFocusNode = FocusNode();
+    // FocusNode myFocusNode = FocusNode();
     return TextFormField(
-      focusNode: myFocusNode,
+      // focusNode: myFocusNode,
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: GoogleFonts.urbanist(
-            fontSize: 14.0,
-            color: myFocusNode.hasFocus ? themeColorLight : themeColorDark),
+        // labelStyle: GoogleFonts.urbanist(
+        //     fontSize: 14.0,
+        //     color: myFocusNode.hasFocus ? themeColorLight : themeColorDark),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
