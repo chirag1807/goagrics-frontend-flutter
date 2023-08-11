@@ -99,32 +99,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       children: [
                         TextFormField(
+                          enabled: false,
                           decoration: const InputDecoration(
                               label: Text('Name'),
                               prefixIcon: Icon(LineAwesomeIcons.user)),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          enabled: false,
                           decoration: const InputDecoration(
-                              label: Text('Email'),
-                              prefixIcon: Icon(LineAwesomeIcons.envelope_1)),
+                              label: Text('Category'),
+                              prefixIcon: Icon(LineAwesomeIcons.user)),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
+                          enabled: false,
                           decoration: const InputDecoration(
                               label: Text('Mobile'),
                               prefixIcon: Icon(LineAwesomeIcons.phone)),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            label: const Text('Password'),
-                            prefixIcon: const Icon(Icons.fingerprint),
-                            suffixIcon: IconButton(
-                                icon: const Icon(LineAwesomeIcons.eye_slash),
-                                onPressed: () {}),
-                          ),
+                          decoration: const InputDecoration(
+                              label: Text('Mobile'),
+                              prefixIcon: Icon(LineAwesomeIcons.phone)),
                         ),
                         const SizedBox(height: 30),
                         SizedBox(

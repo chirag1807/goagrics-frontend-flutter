@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:goagrics/screens/pages/Labor/labor_dash.dart';
+import 'package:goagrics/screens/pages/Labor/labor_home.dart';
 import 'package:goagrics/screens/pages/farmer_dash.dart';
 import 'package:goagrics/screens/reg_login/login_screen.dart';
 
@@ -22,6 +24,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
-        home: FarmerDash());
+        home: LaborDash());
   }
 }
