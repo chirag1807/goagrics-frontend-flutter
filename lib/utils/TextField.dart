@@ -10,27 +10,27 @@ class GoTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FocusNode myFocusNode = new FocusNode();
+    // FocusNode myFocusNode = FocusNode();
     return TextFormField(
-      focusNode: myFocusNode,
+      // focusNode: myFocusNode,
       controller: controller,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: GoogleFonts.urbanist(
-            fontSize: 14.0,
-            color: myFocusNode.hasFocus ? themeColorLight : themeColorDark),
+        // labelStyle: GoogleFonts.urbanist(
+        //     fontSize: 14.0,
+        //     color: myFocusNode.hasFocus ? themeColorLight : themeColorDark),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(25.0),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: themeColorLight,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(
+          borderSide: const BorderSide(
             color: themeColorBlack,
             width: 1.0,
           ),
@@ -38,7 +38,7 @@ class GoTextField extends StatelessWidget {
       ),
       validator: (value) {
         if (value!.trim().isEmpty) {
-          return 'Please enter your name';
+          return 'This Field is Required...';
         }
         return null;
       },

@@ -18,7 +18,6 @@ class _LaborListState extends State<LaborList> {
   var isLoading = false;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       isLoading = true;

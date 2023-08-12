@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:goagrics/models/weather_model.dart';
+import 'package:goagrics/repositories/weather_repo.dart';
 
 import '../utils/constants.dart';
 import '../utils/prefs.dart';
 
 class SplashScreenProvider extends ChangeNotifier{
-  Future<int> checkLoginAndReg() async {
+  Future<int?> checkLoginAndReg() async {
     bool? isLoggedIn = Prefs.getInstance().getBool(IS_LOGGED_IN);
     bool? isRegistered = Prefs.getInstance().getBool(IS_REGISTERED);
 
@@ -20,5 +22,11 @@ class SplashScreenProvider extends ChangeNotifier{
     else{
       return 0;
     }
+
+    // var result = await WeatherRepo().getWeather("ahmedabad");
+    // if(result != null){
+    //   return result;
+    // }
+    // return WeatherModel();
   }
 }

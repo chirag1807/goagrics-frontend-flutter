@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../models/get_all_labors.dart';
 
 Widget showCard(BuildContext context, GetAllLabors labor) {
+  print("Labor name is ${labor.lname!}");
   return InkWell(
     onTap: () {},
     child: Container(

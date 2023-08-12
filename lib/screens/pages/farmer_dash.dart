@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goagrics/screens/pages/Farmer/register_land.dart';
+import 'package:goagrics/screens/pages/Farmer/register_land_tool.dart';
 import 'package:goagrics/screens/pages/profile_user.dart';
 import 'package:goagrics/utils/constants.dart';
 
@@ -17,7 +17,7 @@ class FarmerDash extends StatefulWidget {
 class _FarmerDashState extends State<FarmerDash> {
   late PageController _pageController;
 
-  int page = 0;
+  int page = 2;
 
   @override
   void initState() {
@@ -48,10 +48,10 @@ class _FarmerDashState extends State<FarmerDash> {
         controller: _pageController,
         onPageChanged: onPageChanged,
         physics: const NeverScrollableScrollPhysics(),
-        children: [
+        children: const [
           Home(),
           LaborList(),
-          RegisterLand(),
+          RegisterLandTool(),
           ProfileScreen(),
         ],
       ),
@@ -76,7 +76,7 @@ class _FarmerDashState extends State<FarmerDash> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.add_circle_outlined,
-              textDirection: TextDirection.rtl,
+              // textDirection: TextDirection.rtl,
               color: page == 2 ? themeColorDark : themeColorLight,
             ),
             label: '',

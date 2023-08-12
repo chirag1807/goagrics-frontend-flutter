@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:goagrics/auth_database/AuthServices.dart';
 import 'package:goagrics/utils/TextField.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,17 +17,24 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
-  String _selectedRole = "";
-  String _address = '';
-  var items = ["Farmer", "Labour", "Contractor", "Provider"];
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _pinCodeController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _mobNoController = TextEditingController();
 
-  XFile? _pickedImage;
+
+  String _selectedRole = "";
+  var items = ["Farmer", "Labor", "Dealer"];
+
+  File? _pickedImage;
 
   void _getImageFromGallery() async {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
-      _pickedImage = pickedImage;
+      if(pickedImage != null) {
+        _pickedImage = File(pickedImage.path);
+      }
     });
   }
 
@@ -34,13 +42,15 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
-      _pickedImage = pickedImage;
+      if(pickedImage != null) {
+        _pickedImage = File(pickedImage.path);
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    FocusNode myFocusNode = new FocusNode();
+    FocusNode myFocusNode = FocusNode();
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -96,7 +106,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                                         Icons.camera_alt),
                                                     title: const Text('Camera'),
                                                     onTap: () {
-                                                      // _getImageFromCamera();
+                                                      _getImageFromCamera();
                                                       Navigator.pop(context);
                                                     },
                                                   ),
@@ -173,25 +183,55 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               },
                             ),
                             const SizedBox(height: 20),
+                            GoTextField(
+                                label: 'Address', controller: _addressController),
+                            const SizedBox(height: 20,),
+                            GoTextField(
+                                label: 'Pincode', controller: _pinCodeController),
+                            const SizedBox(height: 20,),
+                            GoTextField(
+                                label: 'Mobile No', controller: _mobNoController),
+                            const SizedBox(height: 20,),
+                            GoTextField(
+                                label: 'City', controller: _cityController),
+                            const SizedBox(height: 20,),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   backgroundColor: themeColorDark),
-                              onPressed: () {
+                              onPressed: () async {
                                 // _getCurrentAddress();
                                 if (_formKey.currentState!.validate()) {
+                                  if(_pickedImage == null){
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Provide Image...",
+                                      style: GoogleFonts.notoSans(
+                                        fontSize: 16,
+                                        color: themeColorWhite,
+                                      ),),
+                                      backgroundColor: themeColorSnackBarRed, ));
+                                  }
+                                  else{
+                                    var status = await AuthServices().registration(_pickedImage, _nameController.text,
+                                        _selectedRole, _addressController.text, _pinCodeController.text,
+                                        _mobNoController.text, _cityController.text);
+                                    if(status){
+                                      showSnackBar("Registration Done Successfully", context, themeColorSnackBarGreen);
+                                    }
+                                    else{
+                                      showSnackBar("Something went Wrong...", context, themeColorSnackBarRed);
+                                    }
+                                  }
                                   print('Name: ${_nameController.text}');
                                   print('Role: $_selectedRole');
-                                  print('Address: $_address');
                                 }
                               },
                               child: Text(
                                 'Submit',
                                 style: GoogleFonts.prompt(
                                   fontSize: 16.0,
-                                  color: Colors.white,
+                                  color: themeColorWhite,
                                 ),
                               ),
                             ),

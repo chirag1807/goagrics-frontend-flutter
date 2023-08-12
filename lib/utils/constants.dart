@@ -16,13 +16,13 @@ double getHeight(BuildContext context) {
   return MediaQuery.of(context).size.height;
 }
 
-showSnackBar(String content, BuildContext context) {
+showSnackBar(String content, BuildContext context, Color color) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
     content: Text(
       content,
       style: GoogleFonts.prompt(color: themeColorWhite, fontSize: 14),
     ),
-    backgroundColor: themeColorDark,
+    backgroundColor: color,
   ));
 }
 
@@ -30,6 +30,10 @@ showSnackBar(String content, BuildContext context) {
 const ACCESS_TOKEN = "accessToken";
 // ignore: constant_identifier_names
 const REFRESH_TOKEN = "refreshToken";
+// ignore: constant_identifier_names
+const ID = "id";
+// ignore: constant_identifier_names
+const CATEGORY = "category";
 // ignore: constant_identifier_names
 const IS_LOGGED_IN = "isLoggedIn";
 // ignore: constant_identifier_names

@@ -16,11 +16,13 @@ dependencies:
   provider: ^6.0.5
   http: ^0.13.6
   image_picker: ^1.0.1
+  firebase_auth: ^4.7.2
+  firebase_core: ^2.15.0
   pinput: ^2.3.0
   google_fonts: ^4.0.4
-  firebase_auth: ^4.7.2
   line_awesome_flutter: ^2.0.0
   lottie: ^2.5.0
+  dialog_flowtter: ^0.3.3
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +38,7 @@ flutter:
   assets:
   - assets/images/
   - assets/animate/
+  - assets/dialog_flow_auth.json
 
 
 # fonts:

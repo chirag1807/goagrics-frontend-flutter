@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: const Text(
                             '0',
                             style:
-                                TextStyle(fontSize: 20, color: themeColorLight),
+                            TextStyle(fontSize: 20, color: themeColorLight),
                           ),
                         ),
                       ),
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   style:
-                      ElevatedButton.styleFrom(backgroundColor: themeColorDark),
+                  ElevatedButton.styleFrom(backgroundColor: themeColorDark),
                   onPressed: () async {
                     int code = await AuthServices()
                         .generateOTP(_phoneNoController.text, context);
@@ -129,17 +129,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     print(code);
                     if (code == 200) {
                       message = "OTP Sent Successfully";
-                      showSnackBar(message, context);
+                      showSnackBar(message, context, themeColorSnackBarGreen);
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => OtpVerifyScreen(
                           phone: _phoneNoController.text,
                         ),
                       ));
                     } else if (code == 400) {
-                      showSnackBar(message, context);
+                      showSnackBar(message, context, themeColorSnackBarRed);
                       message = "Please Try Again with Correct Phone Number";
                     } else if (code == 500) {
-                      showSnackBar(message, context);
+                      showSnackBar(message, context, themeColorSnackBarRed);
                       message = "Internal Server Error, try again later";
                     }
                   },
