@@ -36,15 +36,36 @@ class _GoAgricsBotState extends State<GoAgricsBot> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: const Image(image: AssetImage('assets/images/goagrics.png')),
+          leading: Row(children: [
+            IconButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                icon: const Icon(
+                  Icons.arrow_back_ios_rounded,
+                  color: themeColorDark,
+                )),
+          ]),
           backgroundColor: themeColorWhite,
           elevation: 0.0,
-          title: Text(
-            'GoAgrics',
-            style: GoogleFonts.urbanist(
-                fontSize: 18.0,
-                color: themeColorDark,
-                fontWeight: FontWeight.bold),
+          title: Row(
+            children: [
+              const Image(
+                image: AssetImage('assets/images/goagrics.png'),
+                height: 50,
+                width: 50,
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Text(
+                'GoAgrics',
+                style: GoogleFonts.urbanist(
+                    fontSize: 18.0,
+                    color: themeColorDark,
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
           ),
         ),
         backgroundColor: themeColorWhite,
@@ -81,10 +102,13 @@ class _GoAgricsBotState extends State<GoAgricsBot> {
                       ),
                       IconButton(
                           onPressed: () {
-                            _controller.clear();
                             sendMessage(_controller.text);
+                            _controller.clear();
                           },
-                          icon: Icon(Icons.send))
+                          icon: Icon(
+                            Icons.send,
+                            color: themeColorDark,
+                          ))
                     ],
                   ),
                 )

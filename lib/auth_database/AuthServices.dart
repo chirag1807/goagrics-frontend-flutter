@@ -56,7 +56,7 @@ class AuthServices {
   }
 
   Future<bool> registration(File? Avatar, String name, String category,
-      String address, String pincode, String mobno, String city) async {
+      String address, String pincode, String mobno) async {
     try {
       var request =
           http.MultipartRequest('POST', Uri.parse("${BASE_URI}register"));
@@ -68,7 +68,6 @@ class AuthServices {
       request.fields['address'] = address;
       request.fields['pincode'] = pincode;
       request.fields['mobno'] = mobno;
-      request.fields['city'] = city;
 
       var response = await request.send();
 
@@ -76,6 +75,7 @@ class AuthServices {
         var responseBody = await response.stream.bytesToString();
         var body = jsonDecode(responseBody);
         Registration data = Registration.fromJson(body);
+        print(data.toString());
         await Prefs.getInstance().setString(ID, data.data!.sId!);
         await Prefs.getInstance().setString(CATEGORY, data.data!.category!);
         await Prefs.getInstance().setBool(IS_REGISTERED, true);

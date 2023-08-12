@@ -47,6 +47,7 @@ class _HomeState extends State<Home> {
       labors = tempLabor;
       isLoading = false;
     });
+    // print(tempLabor);
   }
 
   @override
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> {
                       color: themeColorDark,
                     ),
                     Padding(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 20.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,6 +129,8 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                           SizedBox(height: 8),
+                          // Text('Hello'),
+                          // Text(labors[0].lname!),
                           Container(
                             width: double.infinity,
                             height: getHeight(context) * 0.22,

@@ -28,12 +28,13 @@ Widget MessageScreen(List messages, BuildContext context) {
                             messages[index]['isUserMessage'] ? 20 : 0),
                       ),
                       color: messages[index]['isUserMessage']
-                          ? Colors.green.shade200
+                          ? Colors.green.shade400
                           : Colors.green.shade700.withOpacity(0.8)),
                   constraints: BoxConstraints(maxWidth: w * 2 / 3),
                   child: Text(
                     messages[index]['message'].text.text[0],
-                    style: GoogleFonts.urbanist(fontSize: 16),
+                    style: GoogleFonts.urbanist(
+                        fontSize: 16, color: themeColorWhite),
                   )),
             ],
           ),

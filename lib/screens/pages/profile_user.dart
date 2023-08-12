@@ -12,6 +12,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool editing = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -99,27 +100,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       children: [
                         TextFormField(
-                          enabled: false,
+                          enabled: editing,
                           decoration: const InputDecoration(
                               label: Text('Name'),
                               prefixIcon: Icon(LineAwesomeIcons.user)),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
-                          enabled: false,
+                          enabled: editing,
                           decoration: const InputDecoration(
                               label: Text('Category'),
                               prefixIcon: Icon(LineAwesomeIcons.user)),
                         ),
                         const SizedBox(height: 20),
                         TextFormField(
-                          enabled: false,
-                          decoration: const InputDecoration(
-                              label: Text('Mobile'),
-                              prefixIcon: Icon(LineAwesomeIcons.phone)),
-                        ),
-                        const SizedBox(height: 20),
-                        TextFormField(
+                          enabled: editing,
                           decoration: const InputDecoration(
                               label: Text('Mobile'),
                               prefixIcon: Icon(LineAwesomeIcons.phone)),
@@ -128,14 +123,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                editing = editing ? false : true;
+                              });
+                            },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: themeColorLight,
                                 side: BorderSide.none,
                                 shape: const StadiumBorder()),
-                            child: Text("Edit Profile",
-                                style:
-                                    GoogleFonts.prompt(color: themeColorWhite)),
+                            child: editing
+                                ? Text("Save Changes",
+                                    style: GoogleFonts.prompt(
+                                        color: themeColorWhite))
+                                : Text("Edit Profile",
+                                    style: GoogleFonts.prompt(
+                                        color: themeColorWhite)),
                           ),
                         ),
                         const SizedBox(height: 30),

@@ -7,7 +7,7 @@ Widget WeatherScreen(BuildContext context) {
   return Container(
     padding: const EdgeInsets.all(10.0),
     width: getWidth(context),
-    height: getHeight(context) * 0.2,
+    height: getHeight(context) * 0.3,
     decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10.0),
