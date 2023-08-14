@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:goagrics/auth_database/AuthServices.dart';
+import 'package:goagrics/screens/pages/farmer_dash.dart';
 import 'package:goagrics/utils/TextField.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -51,10 +52,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _nameController.dispose();
-    _addressController.dispose();
-    _mobNoController.dispose();
-    _pinCodeController.dispose();
+    // _nameController.dispose();
+    // _addressController.dispose();
+    // _mobNoController.dispose();
+    // _pinCodeController.dispose();
   }
 
   @override
@@ -250,6 +251,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                           "Registration Done Successfully",
                                           context,
                                           themeColorSnackBarGreen);
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => FarmerDash(),
+                                      ));
                                     } else {
                                       showSnackBar("Something went Wrong...",
                                           context, themeColorSnackBarRed);

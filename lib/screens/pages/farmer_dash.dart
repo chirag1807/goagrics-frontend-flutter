@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:goagrics/screens/pages/Farmer/register_land_tool.dart';
 import 'package:goagrics/screens/pages/profile_user.dart';
 import 'package:goagrics/utils/constants.dart';
+import 'package:goagrics/utils/prefs.dart';
 
 import 'Farmer/home_screen.dart';
 import 'Farmer/labor_screen.dart';
@@ -22,6 +23,7 @@ class _FarmerDashState extends State<FarmerDash> {
   @override
   void initState() {
     super.initState();
+    print(Prefs.getInstance().getString(ID));
     _pageController = PageController();
   }
 
@@ -58,9 +60,15 @@ class _FarmerDashState extends State<FarmerDash> {
       bottomNavigationBar: CupertinoTabBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: page == 0 ? themeColorDark : themeColorLight,
+            icon: Column(
+              children: [
+                Icon(
+                  Icons.home,
+                  color: page == 0 ? themeColorDark : themeColorLight,
+                ),
+                const SizedBox(height: 3),
+                Text('Home')
+              ],
             ),
             label: '',
             backgroundColor: Colors.black,

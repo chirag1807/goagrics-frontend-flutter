@@ -62,7 +62,7 @@ class _GoAgricsBotState extends State<GoAgricsBot> {
                 'GoAgrics',
                 style: GoogleFonts.urbanist(
                     fontSize: 18.0,
-                    color: themeColorDark,
+                    color: themeColorLight,
                     fontWeight: FontWeight.bold),
               ),
             ],

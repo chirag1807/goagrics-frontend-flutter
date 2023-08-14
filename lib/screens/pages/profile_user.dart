@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:goagrics/auth_database/Api.dart';
+import 'package:goagrics/screens/pages/Farmer/getLands.dart';
+import 'package:goagrics/screens/pages/Farmer/getTools.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../models/get_single_farmer.dart';
 import '../../utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -13,183 +18,236 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   bool editing = false;
+  bool isLoading = false;
+  late GetSingleFarmer cfarmer;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      isLoading = true;
+    });
+    fetchCurrFarmer();
+  }
+
+  void fetchCurrFarmer() async {
+    GetSingleFarmer tempFarm = await Api.getFarmer();
+    setState(() {
+      cfarmer = tempFarm;
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(
-            leading:
-                const Image(image: AssetImage('assets/images/goagrics.png')),
-            backgroundColor: themeColorWhite,
-            elevation: 0.0,
-            title: Text(
-              'GoAgrics',
-              style:
-                  GoogleFonts.urbanist(fontSize: 18.0, color: themeColorLight),
-            ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    print("Sign Out");
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Expanded(
-                          child: AlertDialog(
-                            backgroundColor: themeColorWhite,
-                            title: Text(
-                              'Log Out',
-                              style: GoogleFonts.prompt(
-                                  fontSize: 16.0, color: themeColorLight),
-                            ),
-                            content: Text(
-                              'Are you sure, you want to log out?',
-                              style: GoogleFonts.prompt(
-                                  fontSize: 15.0, color: themeColorLight),
-                            ),
-                            actions: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'CANCEL',
-                                  style: GoogleFonts.prompt(
-                                      color: themeColorLight),
+    return isLoading
+        ? Center(child: Lottie.asset('assets/animate/farm_animate.json'))
+        : SafeArea(
+            child: Scaffold(
+                appBar: AppBar(
+                  leading: const Image(
+                      image: AssetImage('assets/images/goagrics.png')),
+                  backgroundColor: themeColorWhite,
+                  elevation: 0.0,
+                  title: Text(
+                    'GoAgrics',
+                    style: AppTitle,
+                  ),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          print("Sign Out");
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                backgroundColor: themeColorWhite,
+                                title: Text(
+                                  'Log Out',
+                                  style: GoogleFonts.prompt(fontSize: 16.0),
+                                ),
+                                content: Text(
+                                  'Are you sure, you want to log out?',
+                                  style: GoogleFonts.prompt(fontSize: 15.0),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'CANCEL',
+                                      style: GoogleFonts.prompt(
+                                          color: themeColorLight),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text(
+                                      'YES',
+                                      style: GoogleFonts.prompt(
+                                          color: themeColorSnackBarRed),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.logout,
+                          color: themeColorLight,
+                        ))
+                  ],
+                ),
+                backgroundColor: themeColorWhite,
+                body: SingleChildScrollView(
+                    child: Column(
+                  children: [
+                    const Divider(
+                      thickness: 1.5,
+                      color: themeColorDark,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(children: [
+                        const CircleAvatar(
+                          radius: 60,
+                          backgroundColor: themeColorLight,
+                          child: Image(
+                            image: NetworkImage(
+                                'https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/129-512.png'),
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        Form(
+                          child: Column(
+                            children: [
+                              TextFormField(
+                                enabled: editing,
+                                decoration: InputDecoration(
+                                    label: editing
+                                        ? Text(
+                                            '',
+                                            style: GoogleFonts.urbanist(
+                                                color: themeColorLight),
+                                          )
+                                        : Text(
+                                            cfarmer.data!.fname!,
+                                            style: GoogleFonts.urbanist(),
+                                          ),
+                                    prefixIcon: const Icon(
+                                      LineAwesomeIcons.user,
+                                      color: themeColorLight,
+                                    )),
+                              ),
+                              const SizedBox(height: 20),
+                              TextFormField(
+                                enabled: editing,
+                                decoration: InputDecoration(
+                                    label: Text(
+                                      'Category',
+                                      style: GoogleFonts.urbanist(),
+                                    ),
+                                    prefixIcon: const Icon(
+                                        LineAwesomeIcons.user,
+                                        color: themeColorLight)),
+                              ),
+                              const SizedBox(height: 20),
+                              TextFormField(
+                                enabled: editing,
+                                decoration: InputDecoration(
+                                    label: Text(
+                                      'Mobile',
+                                      style: GoogleFonts.urbanist(),
+                                    ),
+                                    prefixIcon: const Icon(
+                                        LineAwesomeIcons.phone,
+                                        color: themeColorLight)),
+                              ),
+                              const SizedBox(height: 30),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      editing = editing ? false : true;
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: themeColorLight,
+                                      side: BorderSide.none,
+                                      shape: const StadiumBorder()),
+                                  child: editing
+                                      ? Text("Save Changes",
+                                          style: GoogleFonts.prompt(
+                                              color: themeColorWhite))
+                                      : Text("Edit Profile",
+                                          style: GoogleFonts.prompt(
+                                              color: themeColorWhite)),
                                 ),
                               ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'YES',
-                                  style: GoogleFonts.prompt(
-                                      color: themeColorLight),
-                                ),
-                              ),
+                              const SizedBox(height: 30),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(20.0),
+                                      decoration: BoxDecoration(
+                                          color: themeColorLight,
+                                          borderRadius:
+                                              BorderRadius.circular((10.0))),
+                                      child: Column(children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  GetTools(farmer: cfarmer),
+                                            ));
+                                          },
+                                          icon: const Icon(Icons.settings),
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text('Your Tools',
+                                            style: GoogleFonts.notoSansJavanese(
+                                              color: themeColorWhite,
+                                            )),
+                                      ]),
+                                    ),
+                                    const SizedBox(width: 30),
+                                    Container(
+                                      padding: const EdgeInsets.all(20.0),
+                                      decoration: BoxDecoration(
+                                          color: themeColorLight,
+                                          borderRadius:
+                                              BorderRadius.circular((10.0))),
+                                      child: Column(children: [
+                                        IconButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  GetLands(farmer: cfarmer),
+                                            ));
+                                          },
+                                          icon: const Icon(Icons.settings),
+                                          color: Colors.white,
+                                        ),
+                                        const SizedBox(height: 10),
+                                        Text('Your Lands',
+                                            style: GoogleFonts.notoSansJavanese(
+                                              color: themeColorWhite,
+                                            )),
+                                      ]),
+                                    )
+                                  ])
                             ],
                           ),
-                        );
-                      },
-                    );
-                  },
-                  icon: const Icon(
-                    Icons.logout,
-                    color: themeColorLight,
-                  ))
-            ],
-          ),
-          backgroundColor: themeColorWhite,
-          body: SingleChildScrollView(
-              child: Column(
-            children: [
-              const Divider(
-                thickness: 1.5,
-                color: themeColorDark,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(children: [
-                  const CircleAvatar(
-                    radius: 60,
-                    backgroundColor: themeColorLight,
-                    child: Image(
-                      image: NetworkImage(
-                          'https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/129-512.png'),
+                        ),
+                      ]),
                     ),
-                  ),
-                  const SizedBox(height: 30),
-                  Form(
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          enabled: editing,
-                          decoration: const InputDecoration(
-                              label: Text('Name'),
-                              prefixIcon: Icon(LineAwesomeIcons.user)),
-                        ),
-                        const SizedBox(height: 20),
-                        TextFormField(
-                          enabled: editing,
-                          decoration: const InputDecoration(
-                              label: Text('Category'),
-                              prefixIcon: Icon(LineAwesomeIcons.user)),
-                        ),
-                        const SizedBox(height: 20),
-                        TextFormField(
-                          enabled: editing,
-                          decoration: const InputDecoration(
-                              label: Text('Mobile'),
-                              prefixIcon: Icon(LineAwesomeIcons.phone)),
-                        ),
-                        const SizedBox(height: 30),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              setState(() {
-                                editing = editing ? false : true;
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: themeColorLight,
-                                side: BorderSide.none,
-                                shape: const StadiumBorder()),
-                            child: editing
-                                ? Text("Save Changes",
-                                    style: GoogleFonts.prompt(
-                                        color: themeColorWhite))
-                                : Text("Edit Profile",
-                                    style: GoogleFonts.prompt(
-                                        color: themeColorWhite)),
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(20.0),
-                                decoration: BoxDecoration(
-                                    color: themeColorLight,
-                                    borderRadius:
-                                        BorderRadius.circular((10.0))),
-                                child: Column(children: [
-                                  Icon(
-                                    Icons.settings,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text('Your Tools',
-                                      style: GoogleFonts.notoSansJavanese(
-                                        color: themeColorWhite,
-                                      )),
-                                ]),
-                              ),
-                              SizedBox(width: 30),
-                              Container(
-                                padding: EdgeInsets.all(20.0),
-                                decoration: BoxDecoration(
-                                    color: themeColorLight,
-                                    borderRadius:
-                                        BorderRadius.circular((10.0))),
-                                child: Column(children: [
-                                  Icon(
-                                    Icons.settings,
-                                    color: Colors.white,
-                                  ),
-                                  SizedBox(height: 10),
-                                  Text('Your Lands',
-                                      style: GoogleFonts.notoSansJavanese(
-                                        color: themeColorWhite,
-                                      )),
-                                ]),
-                              )
-                            ])
-                      ],
-                    ),
-                  ),
-                ]),
-              ),
-            ],
-          ))),
-    );
+                  ],
+                ))),
+          );
   }
 }

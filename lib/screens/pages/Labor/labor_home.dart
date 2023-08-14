@@ -38,10 +38,7 @@ class _LaborHomeState extends State<LaborHome> {
           elevation: 0.0,
           title: Text(
             'GoAgrics',
-            style: GoogleFonts.urbanist(
-                fontSize: 18.0,
-                color: themeColorLight,
-                fontWeight: FontWeight.bold),
+            style: AppTitle,
           ),
           actions: [
             IconButton(

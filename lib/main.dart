@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/models/registration.dart';
+import 'package:goagrics/screens/pages/Labor/labor_dash.dart';
 import 'package:goagrics/screens/pages/farmer_dash.dart';
 import 'package:goagrics/screens/reg_login/registration_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
@@ -26,6 +27,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
-        home: const RegistrationScreen());
+        home: const FarmerDash());
   }
 }

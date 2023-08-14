@@ -42,3 +42,6 @@ const IS_REGISTERED = "isRegistered";
 
 const BASE_URI = "https://go-agrics.vercel.app/api/";
 const apikey = "4cc41342b133bba8a995e077ca6769a0";
+
+var AppTitle = GoogleFonts.urbanist(
+    fontSize: 18.0, color: themeColorLight, fontWeight: FontWeight.w500);

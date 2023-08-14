@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:goagrics/models/get_all_farmers.dart';
 import 'package:goagrics/screens/goagricbot.dart';
 import 'package:goagrics/utils/horizontal_labor.dart';
 import 'package:goagrics/utils/constants.dart';
@@ -18,7 +19,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<GetAllLabors> labors = [];
+  List<GetAllFarmers> labors = [];
   var isLoading = false;
 
   @override
@@ -29,7 +30,7 @@ class _HomeState extends State<Home> {
       isLoading = true;
     });
     fetchWeather();
-    fetchLabors();
+    fetchFarmers();
     // print(labors.length);
   }
 
@@ -41,8 +42,8 @@ class _HomeState extends State<Home> {
     setState(() {});
   }
 
-  void fetchLabors() async {
-    List<GetAllLabors> tempLabor = await Api.getLabors();
+  void fetchFarmers() async {
+    List<GetAllFarmers> tempLabor = await Api.getFarmers();
     setState(() {
       labors = tempLabor;
       isLoading = false;
@@ -63,8 +64,7 @@ class _HomeState extends State<Home> {
                 elevation: 0.0,
                 title: Text(
                   'GoAgrics',
-                  style: GoogleFonts.urbanist(
-                      fontSize: 18.0, color: themeColorLight),
+                  style: AppTitle,
                 ),
                 actions: [
                   IconButton(
