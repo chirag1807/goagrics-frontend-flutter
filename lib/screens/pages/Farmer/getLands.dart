@@ -50,20 +50,15 @@ class _GetLandsState extends State<GetLands> {
           ),
         ),
         body: Container(
-            padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.farmer.data!.landDetails!.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: widget
-                      .farmer.data!.landDetails![index].bidDetails!.length,
-                  itemBuilder: (BuildContext context, int num) {
-                    LandList(context);
-                  },
-                );
-              },
-            )));
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              for (var data in widget.farmer.data!.landDetails!)
+                for (var element in data.bidDetails!)
+                  LandList(data, element, widget.farmer.data!.address!, context)
+            ],
+          ),
+        ));
   }
 }

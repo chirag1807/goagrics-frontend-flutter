@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goagrics/auth_database/Api.dart';
 import 'package:goagrics/screens/pages/Farmer/getLands.dart';
 import 'package:goagrics/screens/pages/Farmer/getTools.dart';
+import 'package:goagrics/utils/prefs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
@@ -81,7 +82,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      var res =
+                                          await Prefs.getInstance().remove(ID);
+                                      if (res)
+                                        showSnackBar('Signed Out Sucess!',
+                                            context, themeColorSnackBarGreen);
+                                      else
+                                        showSnackBar('Signed Out Failed!',
+                                            context, themeColorSnackBarRed);
+                                    },
                                     child: Text(
                                       'YES',
                                       style: GoogleFonts.prompt(
@@ -110,12 +120,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(children: [
-                        const CircleAvatar(
+                        CircleAvatar(
                           radius: 60,
                           backgroundColor: themeColorLight,
                           child: Image(
-                            image: NetworkImage(
-                                'https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-and-shapes-3/177800/129-512.png'),
+                            image: NetworkImage(cfarmer.data!.avatar!.url!),
                           ),
                         ),
                         const SizedBox(height: 30),
@@ -144,10 +153,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               TextFormField(
                                 enabled: editing,
                                 decoration: InputDecoration(
-                                    label: Text(
-                                      'Category',
-                                      style: GoogleFonts.urbanist(),
-                                    ),
+                                    label: editing
+                                        ? Text(
+                                            '',
+                                            style: GoogleFonts.urbanist(
+                                                color: themeColorLight),
+                                          )
+                                        : Text(
+                                            cfarmer.data!.category!,
+                                            style: GoogleFonts.urbanist(),
+                                          ),
                                     prefixIcon: const Icon(
                                         LineAwesomeIcons.user,
                                         color: themeColorLight)),
@@ -156,10 +171,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               TextFormField(
                                 enabled: editing,
                                 decoration: InputDecoration(
-                                    label: Text(
-                                      'Mobile',
-                                      style: GoogleFonts.urbanist(),
-                                    ),
+                                    label: editing
+                                        ? Text(
+                                            '',
+                                            style: GoogleFonts.urbanist(
+                                                color: themeColorLight),
+                                          )
+                                        : Text(
+                                            cfarmer.data!.phoneNo!.toString(),
+                                            style: GoogleFonts.urbanist(),
+                                          ),
                                     prefixIcon: const Icon(
                                         LineAwesomeIcons.phone,
                                         color: themeColorLight)),

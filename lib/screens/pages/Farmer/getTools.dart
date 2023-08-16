@@ -46,12 +46,15 @@ class _GetToolsState extends State<GetTools> {
           ],
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          widget.farmer.data!.toolDetails!.map((e) => ToolList(e));
-          return null;
-        },
-        itemCount: widget.farmer.data!.toolDetails!.length,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            // widget.farmer.data!.toolDetails!.map((e) => ToolList(e));
+            return ToolList(widget.farmer.data!.toolDetails![index]);
+          },
+          itemCount: widget.farmer.data!.toolDetails!.length,
+        ),
       ),
     );
   }
