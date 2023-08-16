@@ -1,19 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goagrics/models/get_single_farmer.dart';
+import 'package:goagrics/utils/constants.dart';
 
-Widget LandList(LandDetails land) {
+Widget LandList(LandDetails land, BuildContext context) {
+  // print(land.lType);
   return Card(
     child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      padding: const EdgeInsets.all(4.0),
+      width: getWidth(context) * 0.3,
+      height: 200,
       decoration: BoxDecoration(
-        border: Border.all(width: 1.0, style: BorderStyle.solid),
+        borderRadius: BorderRadius.circular(0),
       ),
       child: Column(
         children: [
           Image.network(
             land.lImages!.first.url!,
-            width: 100.0,
+            width: getWidth(context) * 0.3,
             height: 100.0,
           ),
           const SizedBox(

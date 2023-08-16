@@ -46,8 +46,7 @@ class _LaborListState extends State<LaborList> {
                   elevation: 0.0,
                   title: Text(
                     'GoAgrics',
-                    style: GoogleFonts.urbanist(
-                        fontSize: 18.0, color: themeColorLight),
+                    style: AppTitle,
                   )),
               backgroundColor: themeColorWhite,
               body: SingleChildScrollView(

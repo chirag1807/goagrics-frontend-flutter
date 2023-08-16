@@ -15,7 +15,7 @@ class GetLands extends StatefulWidget {
 class _GetLandsState extends State<GetLands> {
   @override
   Widget build(BuildContext context) {
-    print(widget.farmer.data!.landDetails!.length);
+    // print("Name is ${widget.farmer.data!.landDetails!.length}");
     return Scaffold(
       appBar: AppBar(
         leading: Row(children: [
@@ -47,12 +47,18 @@ class _GetLandsState extends State<GetLands> {
           ],
         ),
       ),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          widget.farmer.data!.landDetails!.map((e) => LandList(e));
-          // return null;
-        },
-        itemCount: widget.farmer.data!.landDetails!.length,
+      body: Container(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+        height: 300,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return LandList(widget.farmer.data!.landDetails![index], context);
+            // return null;
+          },
+          itemCount: widget.farmer.data!.landDetails!.length,
+        ),
       ),
     );
   }

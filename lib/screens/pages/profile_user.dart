@@ -36,6 +36,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       cfarmer = tempFarm;
       isLoading = false;
     });
+    print(tempFarm.data!.fname);
   }
 
   @override
@@ -189,57 +190,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.all(20.0),
-                                      decoration: BoxDecoration(
-                                          color: themeColorLight,
-                                          borderRadius:
-                                              BorderRadius.circular((10.0))),
-                                      child: Column(children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  GetTools(farmer: cfarmer),
-                                            ));
-                                          },
-                                          icon: const Icon(Icons.settings),
-                                          color: Colors.white,
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Text('Your Tools',
-                                            style: GoogleFonts.notoSansJavanese(
-                                              color: themeColorWhite,
-                                            )),
-                                      ]),
-                                    ),
+                                    myCard('Your Tools', Icons.settings,
+                                        context, 't'),
                                     const SizedBox(width: 30),
-                                    Container(
-                                      padding: const EdgeInsets.all(20.0),
-                                      decoration: BoxDecoration(
-                                          color: themeColorLight,
-                                          borderRadius:
-                                              BorderRadius.circular((10.0))),
-                                      child: Column(children: [
-                                        IconButton(
-                                          onPressed: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  GetLands(farmer: cfarmer),
-                                            ));
-                                          },
-                                          icon: const Icon(Icons.settings),
-                                          color: Colors.white,
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Text('Your Lands',
-                                            style: GoogleFonts.notoSansJavanese(
-                                              color: themeColorWhite,
-                                            )),
-                                      ]),
-                                    )
+                                    myCard('Your Lands', Icons.settings,
+                                        context, 'l'),
                                   ])
                             ],
                           ),
@@ -249,5 +204,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ))),
           );
+  }
+
+  Widget myCard(String title, IconData icon, BuildContext context, String c) {
+    return Container(
+      padding: const EdgeInsets.all(20.0),
+      decoration: BoxDecoration(
+          color: themeColorLight, borderRadius: BorderRadius.circular((10.0))),
+      child: Column(children: [
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => c == 'l'
+                  ? GetLands(farmer: cfarmer)
+                  : GetTools(farmer: cfarmer),
+            ));
+          },
+          icon: Icon(icon),
+          color: Colors.white,
+        ),
+        const SizedBox(height: 10),
+        Text(title,
+            style: GoogleFonts.notoSansJavanese(
+              color: themeColorWhite,
+            )),
+      ]),
+    );
   }
 }

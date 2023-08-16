@@ -66,8 +66,8 @@ class _FarmerDashState extends State<FarmerDash> {
                   Icons.home,
                   color: page == 0 ? themeColorDark : themeColorLight,
                 ),
-                const SizedBox(height: 3),
-                Text('Home')
+                // const SizedBox(height: 3),
+                // Text('Home')
               ],
             ),
             label: '',
