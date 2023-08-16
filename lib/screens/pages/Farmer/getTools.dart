@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goagrics/models/get_single_farmer.dart';
 import 'package:goagrics/utils/ToolsList.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../utils/constants.dart';
 
@@ -53,7 +51,7 @@ class _GetToolsState extends State<GetTools> {
           widget.farmer.data!.toolDetails!.map((e) => ToolList(e));
           return null;
         },
-        itemCount: widget.farmer.data!.landDetails!.length,
+        itemCount: widget.farmer.data!.toolDetails!.length,
       ),
     );
   }
