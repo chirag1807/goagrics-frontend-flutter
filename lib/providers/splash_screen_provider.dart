@@ -11,6 +11,7 @@ class SplashScreenProvider extends ChangeNotifier{
     bool? isRegistered = Prefs.getInstance().getBool(IS_REGISTERED);
 
     //login done => 1, registration done => 2, else 0
+    print(isRegistered);
     if(isLoggedIn == true){
       if(isRegistered == true){
         return 2;
