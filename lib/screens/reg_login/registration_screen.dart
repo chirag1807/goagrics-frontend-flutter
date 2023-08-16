@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:goagrics/auth_database/AuthServices.dart';
+import 'package:goagrics/screens/pages/farmer_dash.dart';
 import 'package:goagrics/utils/TextField.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,9 +20,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _pinCodeController = TextEditingController();
-  final TextEditingController _cityController = TextEditingController();
-  final TextEditingController _mobNoController = TextEditingController();
 
+  final TextEditingController _mobNoController = TextEditingController();
 
   String _selectedRole = "";
   var items = ["Farmer", "Labor", "Dealer"];
@@ -32,7 +32,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
-      if(pickedImage != null) {
+      if (pickedImage != null) {
         _pickedImage = File(pickedImage.path);
       }
     });
@@ -42,10 +42,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
-      if(pickedImage != null) {
+      if (pickedImage != null) {
         _pickedImage = File(pickedImage.path);
       }
     });
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    // _nameController.dispose();
+    // _addressController.dispose();
+    // _mobNoController.dispose();
+    // _pinCodeController.dispose();
   }
 
   @override
@@ -184,17 +194,28 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             ),
                             const SizedBox(height: 20),
                             GoTextField(
-                                label: 'Address', controller: _addressController),
-                            const SizedBox(height: 20,),
+                                label: 'Address',
+                                controller: _addressController),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             GoTextField(
-                                label: 'Pincode', controller: _pinCodeController),
-                            const SizedBox(height: 20,),
+                                label: 'Pincode',
+                                controller: _pinCodeController),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             GoTextField(
-                                label: 'Mobile No', controller: _mobNoController),
-                            const SizedBox(height: 20,),
-                            GoTextField(
-                                label: 'City', controller: _cityController),
-                            const SizedBox(height: 20,),
+                                label: 'Mobile No',
+                                controller: _mobNoController),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            // GoTextField(
+                            //     label: 'City', controller: _cityController),
+                            const SizedBox(
+                              height: 20,
+                            ),
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(
@@ -204,23 +225,39 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               onPressed: () async {
                                 // _getCurrentAddress();
                                 if (_formKey.currentState!.validate()) {
-                                  if(_pickedImage == null){
-                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Provide Image...",
-                                      style: GoogleFonts.notoSans(
-                                        fontSize: 16,
-                                        color: themeColorWhite,
-                                      ),),
-                                      backgroundColor: themeColorSnackBarRed, ));
-                                  }
-                                  else{
-                                    var status = await AuthServices().registration(_pickedImage, _nameController.text,
-                                        _selectedRole, _addressController.text, _pinCodeController.text,
-                                        _mobNoController.text, _cityController.text);
-                                    if(status){
-                                      showSnackBar("Registration Done Successfully", context, themeColorSnackBarGreen);
-                                    }
-                                    else{
-                                      showSnackBar("Something went Wrong...", context, themeColorSnackBarRed);
+                                  if (_pickedImage == null) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(
+                                        "Please Provide Image...",
+                                        style: GoogleFonts.notoSans(
+                                          fontSize: 16,
+                                          color: themeColorWhite,
+                                        ),
+                                      ),
+                                      backgroundColor: themeColorSnackBarRed,
+                                    ));
+                                  } else {
+                                    var status = await AuthServices()
+                                        .registration(
+                                            _pickedImage,
+                                            _nameController.text,
+                                            _selectedRole,
+                                            _addressController.text,
+                                            _pinCodeController.text,
+                                            _mobNoController.text);
+                                    if (status) {
+                                      showSnackBar(
+                                          "Registration Done Successfully",
+                                          context,
+                                          themeColorSnackBarGreen);
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) => FarmerDash(),
+                                      ));
+                                    } else {
+                                      showSnackBar("Something went Wrong...",
+                                          context, themeColorSnackBarRed);
                                     }
                                   }
                                   print('Name: ${_nameController.text}');

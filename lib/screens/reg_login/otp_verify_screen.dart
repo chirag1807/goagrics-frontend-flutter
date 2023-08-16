@@ -1,12 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:goagrics/auth_database/AuthServices.dart';
-import 'package:goagrics/screens/reg_login/registration_screen.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
-
-import '../../utils/prefs.dart';
 
 // ignore: must_be_immutable
 class OtpVerifyScreen extends StatefulWidget {
@@ -18,114 +13,100 @@ class OtpVerifyScreen extends StatefulWidget {
 }
 
 class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
+  List<String> otpDigits = List.filled(4, '');
   TextEditingController pinController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: getHeight(context) * 0.05,
-                ),
-                const Text(
-                  'Verify Phone',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: themeColorDark),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 30),
-                const Text(
-                  'We have Sent OTP to +91 XXX XXX XXXX',
-                  style: TextStyle(fontSize: 16, color: themeColorLight),
-                ),
-
-                SizedBox(
-                  height: getHeight(context) * 0.05,
-                ),
-
-                //Pinput Package Code
-                SizedBox(
-                  width: getWidth(context),
-                  child: Pinput(
-                    androidSmsAutofillMethod:
-                    AndroidSmsAutofillMethod.smsRetrieverApi,
-                    showCursor: true,
-                    controller: pinController,
-                    length: 6,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    defaultPinTheme: PinTheme(
-                      height: 60.0,
-                      width: 60.0,
-                      textStyle: GoogleFonts.urbanist(
-                        fontSize: 24.0,
-                        color: themeColorLight,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                        color: Colors.white,
-                        border: Border.all(
-                          color: Colors.black.withOpacity(0.5),
-                          width: 1.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                const Expanded(child: SizedBox()),
-                InkWell(
-                  onTap: () async {
-                    bool status = await AuthServices().verifyOTP(widget.phone, pinController.text);
-                    if(status){
-                      showSnackBar("OTP Verification Done Successfully...", context, themeColorSnackBarGreen);
-                      bool? isRegistered = Prefs.getInstance().getBool(IS_REGISTERED);
-                      if(isRegistered == true){
-                        //go to home screen
-                      }
-                      else{
-                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationScreen()));
-                      }
-                    }
-                    else{
-                      showSnackBar("OTP Verification Failed!", context, themeColorSnackBarGreen);
-                    }
-                  },
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: Ink(
-                    height: 55.0,
-                    width: getWidth(context),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30.0),
-                      color: themeColorDark,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Continue',
-                        style: GoogleFonts.urbanist(
-                          fontSize: 15.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: getHeight(context) * 0.1,
-                ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: getHeight(context) * 0.05,
             ),
-          ),
-        ));
+            const Text(
+              'Verify Phone',
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: themeColorDark),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              'We have Sent OTP to +91 XXX XXX XXXX',
+              style: TextStyle(fontSize: 16, color: themeColorLight),
+            ),
+
+            SizedBox(
+              height: getHeight(context) * 0.05,
+            ),
+
+            //Pinput Package Code
+            SizedBox(
+              width: getWidth(context),
+              child: Pinput(
+                androidSmsAutofillMethod:
+                    AndroidSmsAutofillMethod.smsRetrieverApi,
+                showCursor: true,
+                controller: pinController,
+                length: 6,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                defaultPinTheme: PinTheme(
+                  height: 60.0,
+                  width: 60.0,
+                  textStyle: GoogleFonts.urbanist(
+                    fontSize: 24.0,
+                    color: themeColorLight,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.white,
+                    border: Border.all(
+                      color: Colors.black.withOpacity(0.5),
+                      width: 1.0,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            const Expanded(child: SizedBox()),
+            InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(30.0),
+              child: Ink(
+                height: 55.0,
+                width: getWidth(context),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: themeColorDark,
+                ),
+                child: Center(
+                  child: Text(
+                    'Continue',
+                    style: GoogleFonts.urbanist(
+                      fontSize: 15.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(
+              height: getHeight(context) * 0.1,
+            ),
+          ],
+        ),
+      ),
+    ));
   }
 }

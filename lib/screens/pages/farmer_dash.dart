@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:goagrics/screens/pages/Farmer/register_land_tool.dart';
 import 'package:goagrics/screens/pages/profile_user.dart';
 import 'package:goagrics/utils/constants.dart';
+import 'package:goagrics/utils/prefs.dart';
 
 import 'Farmer/home_screen.dart';
 import 'Farmer/labor_screen.dart';
@@ -17,11 +18,12 @@ class FarmerDash extends StatefulWidget {
 class _FarmerDashState extends State<FarmerDash> {
   late PageController _pageController;
 
-  int page = 2;
+  int page = 0;
 
   @override
   void initState() {
     super.initState();
+    print(Prefs.getInstance().getString(ID));
     _pageController = PageController();
   }
 
@@ -58,9 +60,15 @@ class _FarmerDashState extends State<FarmerDash> {
       bottomNavigationBar: CupertinoTabBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-              color: page == 0 ? themeColorDark : themeColorLight,
+            icon: Column(
+              children: [
+                Icon(
+                  Icons.home,
+                  color: page == 0 ? themeColorDark : themeColorLight,
+                ),
+                // const SizedBox(height: 3),
+                // Text('Home')
+              ],
             ),
             label: '',
             backgroundColor: Colors.black,
@@ -76,7 +84,7 @@ class _FarmerDashState extends State<FarmerDash> {
           BottomNavigationBarItem(
             icon: Icon(
               Icons.add_circle_outlined,
-              textDirection: TextDirection.rtl,
+              // textDirection: TextDirection.rtl,
               color: page == 2 ? themeColorDark : themeColorLight,
             ),
             label: '',

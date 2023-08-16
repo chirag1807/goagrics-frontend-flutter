@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../utils/constants.dart';
 import '../../../repositories/register_land.dart';
+import '../../goagricbot.dart';
 
 class RegisterLandTool extends StatefulWidget {
   const RegisterLandTool({super.key});
@@ -17,7 +18,6 @@ class RegisterLandTool extends StatefulWidget {
 }
 
 class _RegisterLandToolState extends State<RegisterLandTool> {
-
   final TextEditingController _areaController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
@@ -29,9 +29,9 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
 
   void _getImageFromGallery() async {
     final pickedImage =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+        await ImagePicker().pickImage(source: ImageSource.gallery);
     setState(() {
-      if(pickedImage != null) {
+      if (pickedImage != null) {
         _pickedImage = File(pickedImage.path);
       }
     });
@@ -39,9 +39,9 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
 
   void _getImageFromCamera() async {
     final pickedImage =
-    await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.camera);
     setState(() {
-      if(pickedImage != null){
+      if (pickedImage != null) {
         _pickedImage = File(pickedImage.path);
       }
     });
@@ -52,13 +52,36 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: const Image(image: AssetImage('assets/images/goagrics.png')),
+        backgroundColor: themeColorWhite,
+        elevation: 0.0,
+        title: Text(
+          'GoAgrics',
+          style: AppTitle,
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GoAgricsBot(),
+                  ));
+            },
+            icon: const Icon(Icons.smart_toy),
+            color: themeColorLight,
+          ),
+        ],
+      ),
+      backgroundColor: themeColorWhite,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
             child: GestureDetector(
-              onTap: (){
+              onTap: () {
                 FocusScope.of(context).unfocus();
               },
               child: SingleChildScrollView(
@@ -73,7 +96,7 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
                             Radio<String>(
                                 value: 'Land',
                                 groupValue: _selectedCategory,
-                                onChanged: (value){
+                                onChanged: (value) {
                                   setState(() {
                                     _selectedCategory = value!;
                                   });
@@ -86,7 +109,7 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
                             Radio<String>(
                                 value: 'Tool',
                                 groupValue: _selectedCategory,
-                                onChanged: (value){
+                                onChanged: (value) {
                                   setState(() {
                                     _selectedCategory = value!;
                                   });
@@ -96,73 +119,91 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
                         )
                       ],
                     ),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     _pickedImage == null
                         ? Container(
-                      height: 200,
-                      color: Colors.grey[200],
-                      alignment: Alignment.center,
-                      child: IconButton(
-                        icon: const Icon(Icons.add_a_photo),
-                        onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return Container(
-                                padding:
-                                const EdgeInsets.all(16.0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    ListTile(
-                                      leading: const Icon(
-                                          Icons.camera_alt),
-                                      title: const Text('Camera'),
-                                      onTap: () {
-                                        _getImageFromCamera();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                    ListTile(
-                                      leading: const Icon(
-                                          Icons.photo_library),
-                                      title:
-                                      const Text('Gallery'),
-                                      onTap: () {
-                                        _getImageFromGallery();
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    )
+                            height: 200,
+                            color: Colors.grey[200],
+                            alignment: Alignment.center,
+                            child: IconButton(
+                              icon: const Icon(Icons.add_a_photo),
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: <Widget>[
+                                          ListTile(
+                                            leading:
+                                                const Icon(Icons.camera_alt),
+                                            title: const Text('Camera'),
+                                            onTap: () {
+                                              _getImageFromCamera();
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                          ListTile(
+                                            leading:
+                                                const Icon(Icons.photo_library),
+                                            title: const Text('Gallery'),
+                                            onTap: () {
+                                              _getImageFromGallery();
+                                              Navigator.pop(context);
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          )
                         : Container(
-                      height: 150,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: FileImage(
-                                  File(_pickedImage?.path ?? "")),
-                              fit: BoxFit.fitHeight)),
+                            height: 150,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: FileImage(
+                                        File(_pickedImage?.path ?? "")),
+                                    fit: BoxFit.fitHeight)),
+                          ),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    const SizedBox(height: 20,),
-                    _selectedCategory == 'Land' ?
-                        Column(
-                          children: [
-                            GoTextField(label: 'Land Area', controller: _areaController),
-                            const SizedBox(height: 20,),
-                            GoTextField(label: 'Land Type', controller: _typeController),
-                            const SizedBox(height: 20,),
-                            GoTextField(label: 'Land Price', controller: _priceController),
-                            const SizedBox(height: 20,),
-                          ],
-                        ) :
-                        GoTextField(label: 'Tool Price', controller: _toolPriceController),
-                        const SizedBox(height: 20,),
+                    _selectedCategory == 'Land'
+                        ? Column(
+                            children: [
+                              GoTextField(
+                                  label: 'Land Area',
+                                  controller: _areaController),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              GoTextField(
+                                  label: 'Land Type',
+                                  controller: _typeController),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              GoTextField(
+                                  label: 'Land Price',
+                                  controller: _priceController),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ],
+                          )
+                        : GoTextField(
+                            label: 'Tool Price',
+                            controller: _toolPriceController),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     SizedBox(
                       width: getWidth(context),
                       child: ElevatedButton(
@@ -173,34 +214,46 @@ class _RegisterLandToolState extends State<RegisterLandTool> {
                             backgroundColor: themeColorDark),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            if(_pickedImage == null){
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please Provide Image of Land...",
-                                style: GoogleFonts.notoSans(
-                                fontSize: 16,
-                                  color: themeColorWhite,
-                              ),),
-                                backgroundColor: themeColorSnackBarRed, ));
-                            }
-                            else{
+                            if (_pickedImage == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text(
+                                  "Please Provide Image of Land...",
+                                  style: GoogleFonts.notoSans(
+                                    fontSize: 16,
+                                    color: themeColorWhite,
+                                  ),
+                                ),
+                                backgroundColor: themeColorSnackBarRed,
+                              ));
+                            } else {
                               int? a;
-                              if(_selectedCategory == 'Land'){
-                                a = await RegisterLandRepo().registerFarmersLand(_pickedImage, _typeController.text,
-                                    _areaController.text, _priceController.text);
+                              if (_selectedCategory == 'Land') {
+                                a = await RegisterLandRepo()
+                                    .registerFarmersLand(
+                                        _pickedImage,
+                                        _typeController.text,
+                                        _areaController.text,
+                                        _priceController.text);
+                              } else {
+                                a = await RegisterToolRepo()
+                                    .registerFarmersTool(_pickedImage,
+                                        _toolPriceController.text);
                               }
-                              else{
-                                a = await RegisterToolRepo().registerFarmersTool(_pickedImage, _toolPriceController.text);
-                              }
-                              if(a == 1){
-                                showSnackBar("Registration done Successfully...", context, themeColorSnackBarGreen);
+                              if (a == 1) {
+                                showSnackBar(
+                                    "Registration done Successfully...",
+                                    context,
+                                    themeColorSnackBarGreen);
                                 _typeController.text = "";
                                 _areaController.text = "";
                                 _priceController.text = "";
                                 _toolPriceController.text = "";
                                 _pickedImage = null;
                                 setState(() {});
-                              }
-                              else{
-                                showSnackBar("Something went Wrong...", context, themeColorSnackBarRed);
+                              } else {
+                                showSnackBar("Something went Wrong...", context,
+                                    themeColorSnackBarRed);
                               }
                             }
                           }

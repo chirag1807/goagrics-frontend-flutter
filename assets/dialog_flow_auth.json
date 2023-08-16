@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "hellochatbot-uwmd",
+  "private_key_id": "a641175e29134079720d16a4c3494c3885e72115",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIIyQroDjVK/vJ\n/VCWhHSQ7lEdVIzMcd5WTnJrFOKFgk4HjLpSHj/cPWnTj6hYHHf/j4rg5/9JTFcS\nFVO95Ni7aXD3aLB+1Dngvd1O+Pj7KmIge4RM/yQ6tLd81NKcjus4dVnLlrni687B\nsevxqPzIjjTLE9tIvp1C865OpRT7YSazzEaK9XPGQuP8CU5nU4T1KEMx4jQCfRxf\ntDGY5N7fMoTI1+EX+cmEgItAWzWtgkhksysBMVTHolAKbKP81QxgmwmVQMWOJGG2\nl1wAjv9AOUZ7oTgndK6BbOrIMJpfGNVa2dlGat8ZVug+no3uZ3I9zrri6K4Vf6+z\nQBMZHXBfAgMBAAECggEARBCTfhTFD1agkL8Kd84/WIT8aDW3ltZJD+ApEJrvOQmq\nYO3u9fucq1nlklJipei0tOEMEdZE35hLanZ/Xu8j+ITxKutbTx79Oh5IVFHfV4hA\nDB0FzyvcleydFKLKp/0BKVfbvJ4bxP1+eSh5/luC8PBQKxqrMq/FCx6V0uBY5O64\n7S6M9f05IqPIzXDxMYNpQQuGtqXBDjOIAyQbWjCJSFittdoKh1KrnebT9dzF/cJc\niDUO/zKFdjsX3zdRtlmJ98z3mOS90ISLEsS2S5PboWucYvcIiCquAFQ1qQmQYjxJ\nn90ga8rKirmTtZ6lSuqbUwPl+SqQuId/KZLRrMm8zQKBgQDqWxu+H7Y/JexhG43u\na3Fpz9iJVcgUYVQguaUEgV2+GHq1UX0A6IKYT3Q0W7uc7MWdIXjD7ssw0pe/T6eB\nVq9OWtLArloJPpHOmPGzFIRNfqKZYFO/08fDzHLH1eKqwPptZhdMugG56QxSnmQJ\n3HBrUBjFatwPFUiGd7SP3JucHQKBgQDanv/0hbU7TRWeERkopuBD50YRvDZWAOj1\nge9sg0VppKVgCXTdFIAicnxvpf0tsCotLVRbqeDl9EnPd4ZKu3k79zI6/ovr0ZHg\n9PShHTjTD8lXj1mJLJTP4zvHFKfdUrrplRwK69rVQ9DUommbw7mn7bbGRH1GSiQW\nN5ad0xp9qwKBgQCBQIh3fmP0RgUttZW85hMh6ZkifWYhH2DXv6usZXD/M98Re4T2\n6EWGnWOYsPMzZD7FH73MSjpUjgFVaSgYJGgBTgQocsCDkre1+xJq0yj42Jvy/XaT\nOMlXSr4PSv59cHtttL2q+neTQl4ifurrqWFzPjS7ROljhDiAuSqjoWdNXQKBgFRg\ndY0cZdwjXiqJkto7vea3RjXmHFqJM2A96/hHmeyyHRm5zJ7fIK0q3pgAynxtt3mE\nO0C9ig12gV5PVUdWn+3i9EIMqFg1pEXchOYB70KWnzDqJLZqvGyX2SR29mrXWUh5\nwj781JLm/5xxqqzxl6AWgSp4mJkeWFsyzTDQnzLNAoGAF3qT4yGEgVfZGML08KPp\nOIKduK5UlkCIPVg2lwHVLg5Nh5PX9KgSHPw7XE2pqwNPI7ZclG/k8CUQKuvvyabZ\nsD+181QnezMXz82Hk4DAgENVMYQW7XJB1OIk0BuTerMDZHVGVTmr0O6/GFnWbXjj\nHBmm1lT9O78sw7zLfEGLvMs=\n-----END PRIVATE KEY-----\n",
+  "client_email": "goagricsbot@hellochatbot-uwmd.iam.gserviceaccount.com",
+  "client_id": "107153347846369343391",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/goagricsbot%40hellochatbot-uwmd.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
