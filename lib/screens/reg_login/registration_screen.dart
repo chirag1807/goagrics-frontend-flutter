@@ -8,8 +8,12 @@ import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../utils/prefs.dart';
+import '../pages/Labor/labor_dash.dart';
+
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  String phone;
+  RegistrationScreen({Key? key, required this.phone}) : super(key: key);
 
   @override
   State<RegistrationScreen> createState() => _RegistrationScreenState();
@@ -21,7 +25,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _pinCodeController = TextEditingController();
 
-  final TextEditingController _mobNoController = TextEditingController();
+  // final TextEditingController _mobNoController = TextEditingController();
 
   String _selectedRole = "";
   var items = ["Farmer", "Labor", "Dealer"];
@@ -202,12 +206,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                             GoTextField(
                                 label: 'Pincode',
                                 controller: _pinCodeController),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            GoTextField(
-                                label: 'Mobile No',
-                                controller: _mobNoController),
+                            // const SizedBox(
+                            //   height: 20,
+                            // ),
+                            // GoTextField(
+                            //     label: 'Mobile No',
+                            //     controller: _mobNoController),
                             const SizedBox(
                               height: 20,
                             ),
@@ -245,23 +249,26 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                                             _selectedRole,
                                             _addressController.text,
                                             _pinCodeController.text,
-                                            _mobNoController.text);
+                                            widget.phone);
                                     if (status) {
-                                      showSnackBar(
-                                          "Registration Done Successfully",
-                                          context,
-                                          themeColorSnackBarGreen);
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => FarmerDash(),
-                                      ));
+                                      showSnackBar("Registration Done Successfully", context, themeColorSnackBarGreen);
+                                      String? category = Prefs.getInstance().getString(CATEGORY);
+                                      if(category == "Farmer"){
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FarmerDash()));
+                                      }
+                                      else if(category == "Labor"){
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LaborDash()));
+                                      }
+                                      else if(category == "Dealer"){
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FarmerDash()));
+                                      }
+                                      else{
+                                        showSnackBar("Something Went Wrong...Please Try Again Later...", context, themeColorSnackBarRed);
+                                      }
                                     } else {
-                                      showSnackBar("Something went Wrong...",
-                                          context, themeColorSnackBarRed);
+                                      showSnackBar("Something went Wrong...", context, themeColorSnackBarRed);
                                     }
                                   }
-                                  print('Name: ${_nameController.text}');
-                                  print('Role: $_selectedRole');
                                 }
                               },
                               child: Text(

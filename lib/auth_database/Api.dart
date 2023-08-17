@@ -1,21 +1,18 @@
 import 'dart:convert';
-
 import 'package:goagrics/models/get_all_farmers.dart';
 import 'package:goagrics/models/get_all_labors.dart';
 import 'package:goagrics/models/get_single_labor.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/get_single_farmer.dart';
-import '../models/get_single_labor.dart';
+import '../utils/prefs.dart';
 
 class Api {
-  //GetFarmers from Database
   static Future<List<GetAllFarmers>> getFarmers() async {
     List<GetAllFarmers> allFarmers = [];
 
     try {
-      var respString = await http.get(Uri.parse(BASE_URI + "/farmers"));
+      var respString = await http.get(Uri.parse("$BASE_URI/farmers"));
       if (respString.statusCode == 200) {
         var respJson = jsonDecode(respString.body);
         var data = respJson["data"] as List;
@@ -23,8 +20,6 @@ class Api {
         allFarmers = data
             .map<GetAllFarmers>((json) => GetAllFarmers.fromJson(json))
             .toList();
-        // print(allFarmers.length);
-        // print("Here is ${allFarmers.runtimeType}");
       }
     } on Exception catch (_) {
       allFarmers = [];
@@ -38,7 +33,7 @@ class Api {
     List<GetAllLabors> allLabors = [];
 
     try {
-      var respString = await http.get(Uri.parse(BASE_URI + "/labor"));
+      var respString = await http.get(Uri.parse("$BASE_URI/labor"));
       if (respString.statusCode == 200) {
         var respJson = jsonDecode(respString.body);
         var data = respJson["data"] as List;
@@ -60,13 +55,11 @@ class Api {
     late GetSingleFarmer currFarmer;
 
     try {
-      // String? currId = Prefs.getInstance().getString(ID);
-      // print(currId);
+      String? currId = Prefs.getInstance().getString(ID);
       var respStr = await http
-          .get(Uri.parse(BASE_URI + "farmer/64cb45d79e63a8037b6e2ab0"));
+          .get(Uri.parse("${BASE_URI}farmer/$currId"));
       var resJson = jsonDecode(respStr.body);
       currFarmer = GetSingleFarmer.fromJson(resJson);
-      // print(currFarmer.data!.fname);
     } catch (error) {}
     return currFarmer;
   }
@@ -74,9 +67,10 @@ class Api {
   static Future<GetSingleLabor> getLabor() async {
     late GetSingleLabor currLabor;
     try {
-      // String? currId = Prefs.getInstance().getString(ID);
+      String? currId = Prefs.getInstance().getString(ID);
+      // 64cc8ca2370666f1b9226457
       var respStr = await http
-          .get(Uri.parse(BASE_URI + "labor/64cc8ca2370666f1b9226457"));
+          .get(Uri.parse("${BASE_URI}labor/$currId"));
       var resJson = jsonDecode(respStr.body);
       currLabor = GetSingleLabor.fromJson(resJson);
     } catch (error) {}

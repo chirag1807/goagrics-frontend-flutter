@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/screens/pages/Labor/labor_dash.dart';
+import 'package:goagrics/screens/pages/profile_user.dart';
+import 'package:goagrics/screens/reg_login/login_screen.dart';
 import 'package:goagrics/screens/splash_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
-        home: const LaborDash()
+        home: const ProfileScreen()
     );
   }
 }

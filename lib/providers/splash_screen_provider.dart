@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goagrics/models/weather_model.dart';
-import 'package:goagrics/repositories/weather_repo.dart';
-
 import '../utils/constants.dart';
 import '../utils/prefs.dart';
 

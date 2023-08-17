@@ -1,15 +1,15 @@
 import 'dart:io';
-
-import 'package:goagrics/utils/constants.dart';
-import 'package:goagrics/utils/prefs.dart';
 import 'package:http/http.dart' as http;
 
-class RegisterLandRepo{
-  Future<int?> registerFarmersLand(File? landImg, String type, String area, String price) async {
+import '../utils/constants.dart';
+import '../utils/prefs.dart';
+
+class UpdateLandRepo{
+  Future<int?> updateFarmersLand(File? landImg, String type, String area, String price, String landId) async {
     String? id = Prefs.getInstance().getString(ID);
 
     try{
-      var request = http.MultipartRequest('PUT', Uri.parse("${BASE_URI}farmer/register/land/$id"));
+      var request = http.MultipartRequest('PUT', Uri.parse("${BASE_URI}farmer/$id/land/$landId"));
       request.files.add(await http.MultipartFile.fromPath('landPhoto', landImg!.path));
 
       request.fields['type'] = type;

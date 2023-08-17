@@ -7,6 +7,8 @@ import 'package:lottie/lottie.dart';
 
 import '../../../auth_database/Api.dart';
 import '../../../utils/constants.dart';
+import '../../../utils/prefs.dart';
+import '../../reg_login/login_screen.dart';
 
 class LaborProfileScreen extends StatefulWidget {
   const LaborProfileScreen({super.key});
@@ -97,7 +99,9 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
                       ),
                       actions: [
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           child: Text(
                             'CANCEL',
                             style: GoogleFonts.prompt(
@@ -105,7 +109,16 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            var res =
+                                await Prefs.getInstance().remove(IS_LOGGED_IN);
+                            if (res) {
+                              showSnackBar('Signed Out Sucess!', context, themeColorSnackBarGreen);
+                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                            }
+                            else
+                              showSnackBar('Signed Out Failed!', context, themeColorSnackBarRed);
+                          },
                           child: Text(
                             'YES',
                             style: GoogleFonts.prompt(

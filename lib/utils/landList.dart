@@ -5,8 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 Widget LandList(
     LandDetails land, BidDetails bids, String place, BuildContext context) {
-  // print(land.lArea);
-  // print(bids.bPrice);
+  print(land.lArea);
+  print(bids.bPrice);
   return Card(
     child: Container(
       padding: const EdgeInsets.all(4.0),

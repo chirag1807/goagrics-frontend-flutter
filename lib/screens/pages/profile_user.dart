@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goagrics/auth_database/Api.dart';
 import 'package:goagrics/screens/pages/Farmer/getLands.dart';
 import 'package:goagrics/screens/pages/Farmer/getTools.dart';
+import 'package:goagrics/screens/reg_login/login_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -74,7 +75,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                                 actions: [
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
                                     child: Text(
                                       'CANCEL',
                                       style: GoogleFonts.prompt(
@@ -84,13 +87,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   ElevatedButton(
                                     onPressed: () async {
                                       var res =
-                                          await Prefs.getInstance().remove(ID);
-                                      if (res)
-                                        showSnackBar('Signed Out Sucess!',
-                                            context, themeColorSnackBarGreen);
+                                          await Prefs.getInstance().remove(IS_LOGGED_IN);
+                                      if (res) {
+                                        showSnackBar('Signed Out Sucess!', context, themeColorSnackBarGreen);
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+                                      }
                                       else
-                                        showSnackBar('Signed Out Failed!',
-                                            context, themeColorSnackBarRed);
+                                        showSnackBar('Signed Out Failed!', context, themeColorSnackBarRed);
                                     },
                                     child: Text(
                                       'YES',

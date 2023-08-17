@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:goagrics/auth_database/AuthServices.dart';
+import 'package:goagrics/screens/reg_login/registration_screen.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
+
+import '../../utils/prefs.dart';
+import '../pages/Labor/labor_dash.dart';
+import '../pages/farmer_dash.dart';
 
 // ignore: must_be_immutable
 class OtpVerifyScreen extends StatefulWidget {
@@ -80,7 +86,30 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
             const SizedBox(height: 20),
             const Expanded(child: SizedBox()),
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                bool? a = await AuthServices().verifyOTP(widget.phone, pinController.text);
+                if(a){
+                  bool? isRegistered = Prefs.getInstance().getBool(IS_REGISTERED);
+                  if(isRegistered == true){
+                    String? category = Prefs.getInstance().getString(CATEGORY);
+                    if(category == "Farmer"){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FarmerDash()));
+                    }
+                    else if(category == "Labor"){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LaborDash()));
+                    }
+                    else if(category == "Dealer"){
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FarmerDash()));
+                    }
+                    else{
+                      showSnackBar("Something Went Wrong...Please Try Again Later...", context, themeColorSnackBarRed);
+                    }
+                  }
+                  else{
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationScreen(phone: widget.phone,)));
+                  }
+                }
+              },
               borderRadius: BorderRadius.circular(30.0),
               child: Ink(
                 height: 55.0,

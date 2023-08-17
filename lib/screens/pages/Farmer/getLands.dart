@@ -13,8 +13,14 @@ class GetLands extends StatefulWidget {
 }
 
 class _GetLandsState extends State<GetLands> {
-  // LandDetails? land;
-  // BidDetails? bids;
+  LandDetails? land;
+  BidDetails? bids;
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.farmer.data!.landDetails![0].lArea);
+  }
   @override
   Widget build(BuildContext context) {
     // print("Name is ${widget.farmer.data!.landDetails!.length}");

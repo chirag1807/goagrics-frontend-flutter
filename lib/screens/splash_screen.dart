@@ -30,13 +30,10 @@ class _SplashScreenState extends State<SplashScreen> {
             builder: (context, provider, _) {
               void checkLoginReg() async {
                 int? a = await provider.checkLoginAndReg();
-                print("a: $a");
                 if (a == 1) {
+                  String? phone = Prefs.getInstance().getString(MOB_NO);
                   Timer(const Duration(seconds: 2), () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const RegistrationScreen()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => RegistrationScreen(phone: phone.toString(),)));
                   });
                 } else if (a == 2) {
                   Timer(const Duration(seconds: 2), () {
@@ -59,13 +56,6 @@ class _SplashScreenState extends State<SplashScreen> {
                     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                   });
                 }
-
-                // WeatherModel? weather = await provider.checkLoginAndReg();
-                // if(weather != null){
-                //   Timer(const Duration(seconds: 3), () {
-                //     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => WeatherScreen(weatherModel: weather)));
-                //   });
-                // }
               }
 
               checkLoginReg();

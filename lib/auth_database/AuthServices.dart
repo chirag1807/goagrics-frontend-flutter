@@ -48,6 +48,8 @@ class AuthServices {
       if (data.data != null) {
         await Prefs.getInstance().setString(ID, data.data!.sId!);
         await Prefs.getInstance().setString(CATEGORY, data.data!.category!);
+        await Prefs.getInstance().setBool(IS_REGISTERED, true);
+        await Prefs.getInstance().setString(MOB_NO, phone);
       }
       await Prefs.getInstance().setBool(IS_LOGGED_IN, true);
       status = true;
@@ -71,7 +73,8 @@ class AuthServices {
 
       var response = await request.send();
 
-      if (response.statusCode == 200) {
+      print(response.statusCode);
+      if (response.statusCode == 201) {
         var responseBody = await response.stream.bytesToString();
         var body = jsonDecode(responseBody);
         Registration data = Registration.fromJson(body);

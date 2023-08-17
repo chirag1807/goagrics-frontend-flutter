@@ -6,15 +6,15 @@ import 'package:http/http.dart' as http;
 
 import '../utils/prefs.dart';
 
-class RegisterToolRepo {
-  Future<int?> registerFarmersTool(File? toolImg, String price) async {
+class UpdateToolRepo {
+  Future<int?> updateFarmersTool(File? toolImg, String price, String toolId) async {
     String? id = Prefs.getInstance().getString(ID);
 
     try {
       var request = http.MultipartRequest(
           'PUT',
           Uri.parse(
-              "${BASE_URI}farmer/register/tool/$id"));
+              "${BASE_URI}farmer/$id/tool/$toolId"));
       request.files
           .add(await http.MultipartFile.fromPath('toolPhoto', toolImg!.path));
 

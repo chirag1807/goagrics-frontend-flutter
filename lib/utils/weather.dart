@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goagrics/models/weather_model.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
