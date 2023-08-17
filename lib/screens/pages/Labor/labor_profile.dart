@@ -49,13 +49,12 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
           prefixIcon: const Icon(
             LineAwesomeIcons.tasks,
             color: themeColorLight,
-          )
-      ),
-      onChanged: (value){
-      setState(() {
-        _skills[index] = value;
-      });
-    },
+          )),
+      onChanged: (value) {
+        setState(() {
+          _skills[index] = value;
+        });
+      },
     );
   }
 
@@ -67,12 +66,12 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ?
-    Center(child: Lottie.asset('assets/animate/farm_animate.json')) :
-    Scaffold(
+    return isLoading
+        ? Center(child: Lottie.asset('assets/animate/farm_animate.json'))
+        : Scaffold(
       appBar: AppBar(
-        leading: const Image(
-            image: AssetImage('assets/images/goagrics.png')),
+        leading:
+        const Image(image: AssetImage('assets/images/goagrics.png')),
         backgroundColor: themeColorWhite,
         elevation: 0.0,
         title: Text(
@@ -128,7 +127,7 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: GestureDetector(
-            onTap: (){
+            onTap: () {
               FocusScope.of(context).unfocus();
             },
             child: Column(
@@ -173,13 +172,16 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
                 ),
                 ElevatedButton(
                   onPressed: _addSkillInput,
-                  child: const Text("Add Skill", style: TextStyle(color: themeColorDark),),
+                  child: const Text(
+                    "Add Skill",
+                    style: TextStyle(color: themeColorDark),
+                  ),
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
                   enabled: editing,
                   keyboardType: TextInputType.number,
-                  onChanged: (value){
+                  onChanged: (value) {
                     setState(() {
                       _price = double.tryParse(value) ?? 0.0;
                     });
@@ -196,9 +198,10 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () async {
-                      if(editing){
+                      if (editing) {
                         print("yesyesyes");
-                        int? a = await UpdateLabor().updateLaborSkillPrice(_skills, _price);
+                        int? a = await UpdateLabor()
+                            .updateLaborSkillPrice(_skills, _price);
                         print(a);
                       }
 
