@@ -123,9 +123,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         CircleAvatar(
                           radius: 60,
                           backgroundColor: themeColorLight,
-                          child: Image(
-                            image: NetworkImage(cfarmer.data!.avatar!.url!),
-                          ),
+                          backgroundImage:
+                              NetworkImage(cfarmer.data!.avatar!.url!),
                         ),
                         const SizedBox(height: 30),
                         Form(

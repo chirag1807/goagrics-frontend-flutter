@@ -127,12 +127,10 @@ class _HomeState extends State<Home> {
                               )
                             ],
                           ),
-                          SizedBox(height: 8),
-                          // Text('Hello'),
-                          // Text(labors[0].lname!),
-                          Container(
+                          const SizedBox(height: 8),
+                          SizedBox(
                             width: double.infinity,
-                            height: getHeight(context) * 0.22,
+                            height: getHeight(context) * 0.20,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,
