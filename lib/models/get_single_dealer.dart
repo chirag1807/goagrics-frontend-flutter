@@ -1,3 +1,5 @@
+import 'package:goagrics/models/get_single_farmer.dart';
+
 class GetSingleDealer {
   bool? success;
   Data? data;
@@ -33,19 +35,19 @@ class Data {
 
   Data(
       {this.avatar,
-        this.sId,
-        this.dname,
-        this.category,
-        this.pincode,
-        this.address,
-        this.phoneNo,
-        this.bidDetails,
-        this.toolDetails,
-        this.iV});
+      this.sId,
+      this.dname,
+      this.category,
+      this.pincode,
+      this.address,
+      this.phoneNo,
+      this.bidDetails,
+      this.toolDetails,
+      this.iV});
 
   Data.fromJson(Map<String, dynamic> json) {
     avatar =
-    json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
+        json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
     sId = json['_id'];
     dname = json['dname'];
     category = json['category'];
@@ -125,57 +127,6 @@ class BidDetails {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['farmer_Id'] = this.farmerId;
     data['bPrice'] = this.bPrice;
-    data['_id'] = this.sId;
-    return data;
-  }
-}
-
-class ToolDetails {
-  List<TImages>? tImages;
-  int? tPrice;
-  String? sId;
-
-  ToolDetails({this.tImages, this.tPrice, this.sId});
-
-  ToolDetails.fromJson(Map<String, dynamic> json) {
-    if (json['t_Images'] != null) {
-      tImages = <TImages>[];
-      json['t_Images'].forEach((v) {
-        tImages!.add(new TImages.fromJson(v));
-      });
-    }
-    tPrice = json['t_Price'];
-    sId = json['_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.tImages != null) {
-      data['t_Images'] = this.tImages!.map((v) => v.toJson()).toList();
-    }
-    data['t_Price'] = this.tPrice;
-    data['_id'] = this.sId;
-    return data;
-  }
-}
-
-class TImages {
-  String? publicId;
-  String? url;
-  String? sId;
-
-  TImages({this.publicId, this.url, this.sId});
-
-  TImages.fromJson(Map<String, dynamic> json) {
-    publicId = json['public_id'];
-    url = json['url'];
-    sId = json['_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['public_id'] = this.publicId;
-    data['url'] = this.url;
     data['_id'] = this.sId;
     return data;
   }

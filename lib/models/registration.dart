@@ -1,4 +1,4 @@
-import 'package:goagrics/models/get_all_farmers.dart';
+import 'package:goagrics/models/get_single_farmer.dart';
 
 class Registration {
   String? message;
@@ -41,19 +41,19 @@ class Data {
 
   Data(
       {this.avatar,
-        this.fname,
-        this.category,
-        this.address,
-        this.pincode,
-        this.phoneNo,
-        this.sId,
-        this.landDetails,
-        this.toolDetails,
-        this.iV});
+      this.fname,
+      this.category,
+      this.address,
+      this.pincode,
+      this.phoneNo,
+      this.sId,
+      this.landDetails,
+      this.toolDetails,
+      this.iV});
 
   Data.fromJson(Map<String, dynamic> json) {
     avatar =
-    json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
+        json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
     fname = json['fname'];
     category = json['category'];
     address = json['address'];
@@ -126,11 +126,11 @@ class LandDetails {
 
   LandDetails(
       {this.lImages,
-        this.lType,
-        this.lPrice,
-        this.lArea,
-        this.sId,
-        this.bidDetails});
+      this.lType,
+      this.lPrice,
+      this.lArea,
+      this.sId,
+      this.bidDetails});
 
   LandDetails.fromJson(Map<String, dynamic> json) {
     if (json['l_Images'] != null) {

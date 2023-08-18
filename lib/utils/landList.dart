@@ -25,7 +25,7 @@ Widget LandList(
             height: 5.0,
           ),
           Text(
-            place,
+            "Located at ${place}",
             style: GoogleFonts.urbanist(fontWeight: FontWeight.bold),
           ),
           const SizedBox(
