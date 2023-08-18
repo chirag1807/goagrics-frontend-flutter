@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goagrics/screens/pages/profile_user.dart';
+import 'package:goagrics/screens/pages/Dealer/dealer_profile.dart';
 import 'package:goagrics/screens/splash_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
-        home: const ProfileScreen()
+        home: const DealerProfile()
     );
   }
 }
