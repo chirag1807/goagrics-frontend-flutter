@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:goagrics/models/get_all_farmers.dart';
 import 'package:goagrics/models/get_all_labors.dart';
+import 'package:goagrics/models/get_single_dealer.dart';
 import 'package:goagrics/models/get_single_labor.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:http/http.dart' as http;
@@ -64,6 +65,19 @@ class Api {
     return currFarmer;
   }
 
+  static Future<GetSingleDealer> getDealer(String id) async {
+    late GetSingleDealer dealer;
+    try {
+      var resStr = await http
+          .get(Uri.parse(BASE_URI + "dealer/64d0b6657b3cc2784e91c95e"));
+      var resJson = jsonDecode(resStr.body);
+      dealer = GetSingleDealer.fromJson(resJson);
+    } catch (err) {
+      dealer.data = null;
+    }
+    return dealer;
+  }
+
   static Future<GetSingleLabor> getLabor() async {
     late GetSingleLabor currLabor;
     try {
@@ -73,7 +87,9 @@ class Api {
           .get(Uri.parse("${BASE_URI}labor/$currId"));
       var resJson = jsonDecode(respStr.body);
       currLabor = GetSingleLabor.fromJson(resJson);
-    } catch (error) {}
+    } catch (error) {
+      currLabor.data = null;
+    }
     return currLabor;
   }
 }

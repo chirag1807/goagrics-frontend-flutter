@@ -20,6 +20,7 @@ class _GetLandsState extends State<GetLands> {
   void initState() {
     super.initState();
     print(widget.farmer.data!.landDetails![0].lArea);
+    print(widget.farmer.data!.landDetails![0].bidDetails![0].bPrice);
   }
   @override
   Widget build(BuildContext context) {

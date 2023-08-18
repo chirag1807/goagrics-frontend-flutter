@@ -30,4 +30,21 @@ class UpdateLandRepo{
       return 0;
     }
   }
+
+  Future<int?> deleteFarmersLand(String landId) async {
+    String? id = Prefs.getInstance().getString(ID);
+
+    try{
+      var response = await http.delete(Uri.parse("${BASE_URI}farmer/$id/land/$landId"));
+      if(response.statusCode == 200){
+        return 1;
+      }
+      else{
+        return 0;
+      }
+    } catch(e){
+      print(e);
+      return 0;
+    }
+  }
 }

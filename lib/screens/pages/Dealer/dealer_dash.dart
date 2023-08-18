@@ -1,29 +1,34 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:goagrics/screens/pages/Farmer/register_land_tool.dart';
-import 'package:goagrics/screens/pages/profile_user.dart';
-import 'package:goagrics/utils/constants.dart';
-import 'package:goagrics/utils/prefs.dart';
+import 'package:goagrics/models/get_all_farmers.dart';
+import 'package:goagrics/utils/FarmersList.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
-import 'Farmer/home_screen.dart';
-import 'Farmer/labor_screen.dart';
+import '../../../auth_database/Api.dart';
+import '../../../utils/constants.dart';
+import '../../../utils/prefs.dart';
+import 'dealer_home.dart';
+import 'dealer_profile.dart';
+import 'dealer_tools.dart';
 
-class FarmerDash extends StatefulWidget {
-  const FarmerDash({super.key});
+class DealerDash extends StatefulWidget {
+  const DealerDash({super.key});
 
   @override
-  State<FarmerDash> createState() => _FarmerDashState();
+  State<DealerDash> createState() => _DealerDashState();
 }
 
-class _FarmerDashState extends State<FarmerDash> {
+class _DealerDashState extends State<DealerDash> {
   late PageController _pageController;
 
   int page = 0;
-
+  List<GetAllFarmers>? farmers;
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
-    print(Prefs.getInstance().getString(ID));
+    // print(Prefs.getInstance().getString(ID));
     _pageController = PageController();
   }
 
@@ -46,15 +51,16 @@ class _FarmerDashState extends State<FarmerDash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: themeColorWhite,
       body: PageView(
         controller: _pageController,
         onPageChanged: onPageChanged,
         physics: const NeverScrollableScrollPhysics(),
-        children: const [
-          Home(),
-          LaborList(),
-          RegisterLandTool(),
-          ProfileScreen(),
+        children: [
+          DealerHome(),
+          // FarmersList(),
+          DealerTools(),
+          DealerProfile(),
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
@@ -70,12 +76,12 @@ class _FarmerDashState extends State<FarmerDash> {
                 // Text('Home')
               ],
             ),
-            label: 'Home',
+            label: '',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.work,
+              Icons.supervised_user_circle_rounded,
               color: page == 1 ? themeColorDark : themeColorLight,
             ),
             label: '',
@@ -86,14 +92,6 @@ class _FarmerDashState extends State<FarmerDash> {
               Icons.add_circle_outlined,
               // textDirection: TextDirection.rtl,
               color: page == 2 ? themeColorDark : themeColorLight,
-            ),
-            label: '',
-            backgroundColor: Colors.black,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-              color: page == 3 ? themeColorDark : themeColorLight,
             ),
             label: '',
             backgroundColor: Colors.black,

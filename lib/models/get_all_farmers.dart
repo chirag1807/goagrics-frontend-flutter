@@ -1,3 +1,5 @@
+import 'get_single_farmer.dart';
+
 class GetAllFarmers {
   Avatar? avatar;
   String? sId;
@@ -12,19 +14,19 @@ class GetAllFarmers {
 
   GetAllFarmers(
       {this.avatar,
-        this.sId,
-        this.fname,
-        this.category,
-        this.address,
-        this.pincode,
-        this.phoneNo,
-        this.landDetails,
-        this.toolDetails,
-        this.iV});
+      this.sId,
+      this.fname,
+      this.category,
+      this.address,
+      this.pincode,
+      this.phoneNo,
+      this.landDetails,
+      this.toolDetails,
+      this.iV});
 
   GetAllFarmers.fromJson(Map<String, dynamic> json) {
     avatar =
-    json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
+        json['Avatar'] != null ? new Avatar.fromJson(json['Avatar']) : null;
     sId = json['_id'];
     fname = json['fname'];
     category = json['category'];
@@ -87,148 +89,148 @@ class Avatar {
   }
 }
 
-class LandDetails {
-  List<LImages>? lImages;
-  String? lType;
-  int? lPrice;
-  String? lArea;
-  String? sId;
-  List<BidDetails>? bidDetails;
+// class LandDetails {
+//   List<LImages>? lImages;
+//   String? lType;
+//   int? lPrice;
+//   String? lArea;
+//   String? sId;
+//   List<BidDetails>? bidDetails;
 
-  LandDetails(
-      {this.lImages,
-        this.lType,
-        this.lPrice,
-        this.lArea,
-        this.sId,
-        this.bidDetails});
+//   LandDetails(
+//       {this.lImages,
+//         this.lType,
+//         this.lPrice,
+//         this.lArea,
+//         this.sId,
+//         this.bidDetails});
 
-  LandDetails.fromJson(Map<String, dynamic> json) {
-    if (json['l_Images'] != null) {
-      lImages = <LImages>[];
-      json['l_Images'].forEach((v) {
-        lImages!.add(new LImages.fromJson(v));
-      });
-    }
-    lType = json['l_Type'];
-    lPrice = json['l_Price'];
-    lArea = json['l_Area'];
-    sId = json['_id'];
-    if (json['bidDetails'] != null) {
-      bidDetails = <BidDetails>[];
-      json['bidDetails'].forEach((v) {
-        bidDetails!.add(new BidDetails.fromJson(v));
-      });
-    }
-  }
+//   LandDetails.fromJson(Map<String, dynamic> json) {
+//     if (json['l_Images'] != null) {
+//       lImages = <LImages>[];
+//       json['l_Images'].forEach((v) {
+//         lImages!.add(new LImages.fromJson(v));
+//       });
+//     }
+//     lType = json['l_Type'];
+//     lPrice = json['l_Price'];
+//     lArea = json['l_Area'];
+//     sId = json['_id'];
+//     if (json['bidDetails'] != null) {
+//       bidDetails = <BidDetails>[];
+//       json['bidDetails'].forEach((v) {
+//         bidDetails!.add(new BidDetails.fromJson(v));
+//       });
+//     }
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.lImages != null) {
-      data['l_Images'] = this.lImages!.map((v) => v.toJson()).toList();
-    }
-    data['l_Type'] = this.lType;
-    data['l_Price'] = this.lPrice;
-    data['l_Area'] = this.lArea;
-    data['_id'] = this.sId;
-    if (this.bidDetails != null) {
-      data['bidDetails'] = this.bidDetails!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     if (this.lImages != null) {
+//       data['l_Images'] = this.lImages!.map((v) => v.toJson()).toList();
+//     }
+//     data['l_Type'] = this.lType;
+//     data['l_Price'] = this.lPrice;
+//     data['l_Area'] = this.lArea;
+//     data['_id'] = this.sId;
+//     if (this.bidDetails != null) {
+//       data['bidDetails'] = this.bidDetails!.map((v) => v.toJson()).toList();
+//     }
+//     return data;
+//   }
+// }
 
-class LImages {
-  String? publicId;
-  String? url;
-  String? sId;
+// class LImages {
+//   String? publicId;
+//   String? url;
+//   String? sId;
 
-  LImages({this.publicId, this.url, this.sId});
+//   LImages({this.publicId, this.url, this.sId});
 
-  LImages.fromJson(Map<String, dynamic> json) {
-    publicId = json['public_id'];
-    url = json['url'];
-    sId = json['_id'];
-  }
+//   LImages.fromJson(Map<String, dynamic> json) {
+//     publicId = json['public_id'];
+//     url = json['url'];
+//     sId = json['_id'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['public_id'] = this.publicId;
-    data['url'] = this.url;
-    data['_id'] = this.sId;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['public_id'] = this.publicId;
+//     data['url'] = this.url;
+//     data['_id'] = this.sId;
+//     return data;
+//   }
+// }
 
-class BidDetails {
-  String? dealerId;
-  int? bPrice;
-  String? sId;
+// class BidDetails {
+//   String? dealerId;
+//   int? bPrice;
+//   String? sId;
 
-  BidDetails({this.dealerId, this.bPrice, this.sId});
+//   BidDetails({this.dealerId, this.bPrice, this.sId});
 
-  BidDetails.fromJson(Map<String, dynamic> json) {
-    dealerId = json['dealerId'];
-    bPrice = json['bPrice'];
-    sId = json['_id'];
-  }
+//   BidDetails.fromJson(Map<String, dynamic> json) {
+//     dealerId = json['dealerId'];
+//     bPrice = json['bPrice'];
+//     sId = json['_id'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['dealerId'] = this.dealerId;
-    data['bPrice'] = this.bPrice;
-    data['_id'] = this.sId;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['dealerId'] = this.dealerId;
+//     data['bPrice'] = this.bPrice;
+//     data['_id'] = this.sId;
+//     return data;
+//   }
+// }
 
-class ToolDetails {
-  List<TImages>? tImages;
-  int? tPrice;
-  String? sId;
+// class ToolDetails {
+//   List<TImages>? tImages;
+//   int? tPrice;
+//   String? sId;
 
-  ToolDetails({this.tImages, this.tPrice, this.sId});
+//   ToolDetails({this.tImages, this.tPrice, this.sId});
 
-  ToolDetails.fromJson(Map<String, dynamic> json) {
-    if (json['t_Images'] != null) {
-      tImages = <TImages>[];
-      json['t_Images'].forEach((v) {
-        tImages!.add(new TImages.fromJson(v));
-      });
-    }
-    tPrice = json['t_Price'];
-    sId = json['_id'];
-  }
+//   ToolDetails.fromJson(Map<String, dynamic> json) {
+//     if (json['t_Images'] != null) {
+//       tImages = <TImages>[];
+//       json['t_Images'].forEach((v) {
+//         tImages!.add(new TImages.fromJson(v));
+//       });
+//     }
+//     tPrice = json['t_Price'];
+//     sId = json['_id'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.tImages != null) {
-      data['t_Images'] = this.tImages!.map((v) => v.toJson()).toList();
-    }
-    data['t_Price'] = this.tPrice;
-    data['_id'] = this.sId;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     if (this.tImages != null) {
+//       data['t_Images'] = this.tImages!.map((v) => v.toJson()).toList();
+//     }
+//     data['t_Price'] = this.tPrice;
+//     data['_id'] = this.sId;
+//     return data;
+//   }
+// }
 
-class TImages {
-  String? publicId;
-  String? url;
-  String? sId;
+// class TImages {
+//   String? publicId;
+//   String? url;
+//   String? sId;
 
-  TImages({this.publicId, this.url, this.sId});
+//   TImages({this.publicId, this.url, this.sId});
 
-  TImages.fromJson(Map<String, dynamic> json) {
-    publicId = json['public_id'];
-    url = json['url'];
-    sId = json['_id'];
-  }
+//   TImages.fromJson(Map<String, dynamic> json) {
+//     publicId = json['public_id'];
+//     url = json['url'];
+//     sId = json['_id'];
+//   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['public_id'] = this.publicId;
-    data['url'] = this.url;
-    data['_id'] = this.sId;
-    return data;
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['public_id'] = this.publicId;
+//     data['url'] = this.url;
+//     data['_id'] = this.sId;
+//     return data;
+//   }
+// }

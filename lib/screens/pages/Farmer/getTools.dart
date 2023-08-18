@@ -51,7 +51,7 @@ class _GetToolsState extends State<GetTools> {
         child: ListView.builder(
           itemBuilder: (context, index) {
             // widget.farmer.data!.toolDetails!.map((e) => ToolList(e));
-            return ToolList(widget.farmer.data!.toolDetails![index]);
+            return ToolList(widget.farmer.data!.toolDetails![index], context);
           },
           itemCount: widget.farmer.data!.toolDetails!.length,
         ),

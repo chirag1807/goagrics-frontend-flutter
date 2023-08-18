@@ -32,4 +32,21 @@ class UpdateToolRepo {
       return 0;
     }
   }
+
+  Future<int?> deleteFarmersTool(String toolId) async {
+    String? id = Prefs.getInstance().getString(ID);
+
+    try{
+      var response = await http.delete(Uri.parse("${BASE_URI}farmer/$id/tool/$toolId"));
+      if(response.statusCode == 200){
+        return 1;
+      }
+      else{
+        return 0;
+      }
+    } catch(e){
+      print(e);
+      return 0;
+    }
+  }
 }

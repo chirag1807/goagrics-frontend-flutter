@@ -29,7 +29,7 @@ Widget laborListCard(GetAllLabors labor) {
                       fontSize: 17,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
