@@ -43,7 +43,8 @@ class _FarmersListState extends State<FarmersList> {
                 children: [
                   for (var data in farmers!)
                     for (var items in data.landDetails!)
-                      LandList(items, data.address!, context)
+                      LandList(items, data.address!, data.fname!,
+                          data.phoneNo!.toString(), data.sId!, context)
                 ],
               ),
             ),

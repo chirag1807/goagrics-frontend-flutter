@@ -5,6 +5,7 @@ import 'package:goagrics/models/get_all_labors.dart';
 import 'package:goagrics/models/get_single_dealer.dart';
 import 'package:goagrics/models/get_single_labor.dart';
 import 'package:goagrics/utils/constants.dart';
+import 'package:goagrics/utils/prefs.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/get_single_farmer.dart';
@@ -97,5 +98,25 @@ class Api {
       currLabor.data = null;
     }
     return currLabor;
+  }
+
+  static Future<bool> registerBid(String price, String fid, String lid) async {
+    bool ans = false;
+    String? did = Prefs.getInstance().getString(ID);
+    try {
+      var res = await http.put(
+          Uri.parse(
+              BASE_URI + "dealer/" + did! + "/farmer/" + fid + "/land/" + lid),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Connection': 'keep-alive',
+          },
+          body: jsonEncode(<String, String>{'bid_price': price}));
+      // var resBod = jsonDecode(res.body);
+      if (res.statusCode == 200) ans = true;
+    } catch (e) {
+      ans = false;
+    }
+    return ans;
   }
 }

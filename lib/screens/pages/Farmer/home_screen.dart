@@ -128,9 +128,9 @@ class _HomeState extends State<Home> {
                             ],
                           ),
                           const SizedBox(height: 8),
-                          SizedBox(
+                          Container(
                             width: double.infinity,
-                            height: getHeight(context) * 0.20,
+                            height: getHeight(context) * 0.22,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               shrinkWrap: true,

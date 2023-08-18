@@ -9,6 +9,7 @@ Widget showCard(BuildContext context, GetAllLabors labor) {
   return InkWell(
     onTap: () {},
     child: Container(
+      margin: EdgeInsets.only(right: 10),
       width: getWidth(context) * 0.6,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -48,6 +49,7 @@ Widget showCard(BuildContext context, GetAllLabors labor) {
             Container(
               height: getHeight(context) * 0.05,
               width: getWidth(context) * 0.5,
+              padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
                   color: themeColorDark),

@@ -5,16 +5,23 @@ import '../models/get_all_labors.dart';
 import 'constants.dart';
 
 Widget laborListCard(GetAllLabors labor) {
+  // print(labor.avatar!.url);
   return Card(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       child: Row(
         children: [
-          CircleAvatar(
-            backgroundColor: Colors.grey,
-            backgroundImage: NetworkImage(labor.avatar!.url!),
-            radius: 40,
-          ),
+          labor.avatar!.url!.isEmpty
+              ? const CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  backgroundImage: AssetImage('assets/images/goagrics.png'),
+                  radius: 40,
+                )
+              : CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  backgroundImage: NetworkImage(labor.avatar!.url!),
+                  radius: 40,
+                ),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)
@@ -25,9 +32,7 @@ Widget laborListCard(GetAllLabors labor) {
                 Text(
                   labor.lname!,
                   style: GoogleFonts.urbanist(
-                      color: themeColorLight,
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold),
+                      fontSize: 17, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 10,
@@ -35,29 +40,23 @@ Widget laborListCard(GetAllLabors labor) {
                 Text(
                   "${labor.wage.toString()}/- Per Day",
                   style: GoogleFonts.urbanist(
-                      color: themeColorLight,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
+                      fontSize: 15, fontWeight: FontWeight.w500),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
                   "Contact at ${labor.phoneNo.toString()}",
                   style: GoogleFonts.urbanist(
-                      color: themeColorLight,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
+                      fontSize: 15, fontWeight: FontWeight.w500),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 6,
                 ),
                 Text(
                   '${labor.skills.toString()}',
                   style: GoogleFonts.urbanist(
-                      color: themeColorLight,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500),
+                      fontSize: 15, fontWeight: FontWeight.w500),
                 ),
               ],
             ),
