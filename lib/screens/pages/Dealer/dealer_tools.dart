@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../models/get_all_farmers.dart';
 import '../../../utils/FarmersList.dart';
+import '../../../utils/LaborsList.dart';
 
 class DealerTools extends StatefulWidget {
   const DealerTools({super.key});
@@ -45,7 +46,7 @@ class _DealerToolsState extends State<DealerTools> {
         ),
         body: TabBarView(children: [
           FarmersList(),
-          Icon(Icons.directions_transit),
+          LaborsList(),
         ]),
       ),
     );
