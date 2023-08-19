@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:goagrics/screens/pages/Dealer/dealer_dash.dart';
 import 'package:goagrics/screens/pages/Labor/labor_dash.dart';
 import 'package:goagrics/screens/pages/farmer_dash.dart';
 import 'package:goagrics/providers/splash_screen_provider.dart';
@@ -45,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LaborDash()));
                     }
                     else if(category == "Dealer"){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FarmerDash()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DealerDash()));
                     }
                     else{
                       showSnackBar("Something Went Wrong...Please Try Again Later...", context, themeColorSnackBarRed);

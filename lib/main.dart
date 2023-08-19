@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ).copyWith(useMaterial3: true),
-        home: const DealerProfile()
+        home: const SplashScreen()
     );
   }
 }

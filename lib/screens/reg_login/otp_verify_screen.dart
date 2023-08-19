@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goagrics/auth_database/AuthServices.dart';
+import 'package:goagrics/screens/pages/Dealer/dealer_dash.dart';
 import 'package:goagrics/screens/reg_login/registration_screen.dart';
 import 'package:goagrics/utils/constants.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -99,7 +100,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LaborDash()));
                     }
                     else if(category == "Dealer"){
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const FarmerDash()));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const DealerDash()));
                     }
                     else{
                       showSnackBar("Something Went Wrong...Please Try Again Later...", context, themeColorSnackBarRed);

@@ -2,13 +2,16 @@ import 'dart:convert';
 
 import 'package:goagrics/utils/constants.dart';
 import 'package:http/http.dart' as http;
+
+import '../utils/prefs.dart';
 class UpdateLabor{
   Future<int?> updateLaborSkillPrice(List<String> skills, double price) async {
+    String? id  = Prefs.getInstance().getString(ID);
     try{
       print(skills);
       print(price);
       var resp = await http.put(
-          Uri.parse("${BASE_URI}labor/register/64cc8ca2370666f1b9226457"),
+          Uri.parse("${BASE_URI}labor/register/$id"),
         body: jsonEncode(
           {
             "skill": skills,

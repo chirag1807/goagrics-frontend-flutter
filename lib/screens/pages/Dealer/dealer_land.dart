@@ -143,7 +143,7 @@ class _DealerLandState extends State<DealerLand> {
                                           themeColorSnackBarGreen);
                                     else
                                       showSnackBar('Bid Failed to Register',
-                                          context, themeColorSnackBarRed);
+                                          context, themeColorSnackBarGreen);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(

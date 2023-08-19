@@ -216,6 +216,12 @@ class _LaborProfileScreenState extends State<LaborProfileScreen> {
                         int? a = await UpdateLabor()
                             .updateLaborSkillPrice(_skills, _price);
                         print(a);
+                        if(a== 1){
+                          showSnackBar("Labor Updated Successfully", context, themeColorSnackBarGreen);
+                        }
+                        else{
+                          showSnackBar("Something went wrong...", context, themeColorSnackBarRed);
+                        }
                       }
 
                       setState(() {

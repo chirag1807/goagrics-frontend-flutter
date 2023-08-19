@@ -107,6 +107,7 @@ class Api {
           },
           body: jsonEncode(<String, String>{'bid_price': price}));
       // var resBod = jsonDecode(res.body);
+      print(res.statusCode);
       if (res.statusCode == 200) ans = true;
     } catch (e) {
       ans = false;
