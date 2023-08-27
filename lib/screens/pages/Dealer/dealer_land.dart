@@ -11,14 +11,15 @@ class DealerLand extends StatefulWidget {
   LandDetails land;
   String place;
   String farmer;
+  String contact;
   String fId;
   DealerLand(
       {super.key,
       required this.land,
       required this.place,
       required this.farmer,
-      required this.fId,
-      required String fphone});
+      required this.contact,
+      required this.fId,});
 
   @override
   State<DealerLand> createState() => _DealerLandState();
@@ -114,6 +115,19 @@ class _DealerLandState extends State<DealerLand> {
                                   ),
                                   prefixIcon: const Icon(Icons.place,
                                       color: themeColorLight)),
+                            ),
+                            const SizedBox(height: 20),
+                            TextFormField(
+                              enabled: false,
+                              decoration: InputDecoration(
+                                label: Text(
+                                  "Contact No : ${widget.contact}",
+                                  style: GoogleFonts.urbanist(
+                                    color: themeColorBlack, fontSize: 15
+                                  ),
+                                ),
+                                prefixIcon: const Icon(Icons.phone, color: themeColorLight,)
+                              ),
                             ),
                             const SizedBox(height: 30),
                             SizedBox(

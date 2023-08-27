@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goagrics/screens/pages/Dealer/dealer_profile.dart';
 import 'package:goagrics/screens/splash_screen.dart';
 import 'package:goagrics/utils/prefs.dart';
 

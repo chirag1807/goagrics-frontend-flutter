@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:goagrics/models/get_all_farmers.dart';
+import 'package:goagrics/screens/pages/Dealer/dealer_profile1.dart';
 import 'package:goagrics/utils/FarmersList.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -61,6 +62,7 @@ class _DealerDashState extends State<DealerDash> {
           // FarmersList(),
           DealerTools(),
           DealerProfile(),
+          DealerProfile1()
         ],
       ),
       bottomNavigationBar: CupertinoTabBar(
@@ -96,6 +98,14 @@ class _DealerDashState extends State<DealerDash> {
             label: '',
             backgroundColor: Colors.black,
           ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.person,
+                color: page == 3 ? themeColorDark : themeColorLight,
+              ),
+            label: '',
+            backgroundColor: Colors.black,
+          )
         ],
         onTap: navTapped,
       ),
